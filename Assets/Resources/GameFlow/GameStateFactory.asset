@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cabdef63f1dd5f4a85c6e3eb66c1fcc, type: 3}
+  m_Name: GameStateFactory
+  m_EditorClassIdentifier: 
+  AvailableBuilders: []
+  eventProvider: {fileID: 11400000, guid: 4ef8e9209b911694cb5c6d1dd84de2bb, type: 2}
+  commandProvider: {fileID: 11400000, guid: 97f95c42948bca04f908d6be84cae1d3, type: 2}

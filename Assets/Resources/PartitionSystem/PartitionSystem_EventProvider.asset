@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5f682353a572d4da5a02d172c533d8, type: 3}
+  m_Name: PartitionSystem_EventProvider
+  m_EditorClassIdentifier: 
+  eventId_trackedTargetChanged: 4
+  m_projectEvents: {fileID: 11400000, guid: b733518f9a799044283e6a69903b317c, type: 2}

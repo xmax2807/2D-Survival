@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94385e9a6ee3ef540b8ac0bb5aa26033, type: 3}
+  m_Name: Buff Damage Plus
+  m_EditorClassIdentifier: 
+  Type: 0
+  HasTickTime: 0
+  Tick:
+    Interval: 0
+    OnTick:
+      m_PersistentCalls:
+        m_Calls: []
+  DeactivateConditionData:
+    Type: 2
+    Duration: 0
+    EventType: 0
+    OnDeactivate:
+      m_PersistentCalls:
+        m_Calls: []
+  ModifyStat:
+    Operation: 0
+    StatType: 3
+    Amount: 10
+  Children: []
