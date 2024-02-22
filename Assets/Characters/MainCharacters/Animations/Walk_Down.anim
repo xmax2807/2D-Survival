@@ -84,15 +84,15 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: OnEventTriggered
-    data: 1,0.5
+    data: 1,0
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0
   - time: 0.5
     functionName: OnEventTriggered
-    data: 1,0.5
+    data: 1,0
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0

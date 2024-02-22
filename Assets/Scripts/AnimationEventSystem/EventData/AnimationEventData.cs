@@ -13,6 +13,8 @@ namespace Project.AnimationEventSystem
             }
         }
 
+        public UnityEngine.GameObject Invoker {get;set;}
+
         protected AnimationEventData(){}
 
         public abstract AnimationEventData Clone();

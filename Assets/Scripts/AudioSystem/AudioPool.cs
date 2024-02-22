@@ -15,7 +15,21 @@ namespace Project.AudioSystem
         {
             GameObject obj = new GameObject("AudioSource");
             AudioSource source = obj.AddComponent<AudioSource>();
+            obj.transform.SetParent(container);
             return source;
+        }
+
+        public override AudioSource Get()
+        {
+            AudioSource source = base.Get();
+            source.gameObject.SetActive(true);
+            return source;
+        }
+
+        public override void Return(AudioSource source){
+            if(source == null) return;
+            base.Return(source);
+            source.gameObject.SetActive(false);
         }
     }
 }

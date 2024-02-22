@@ -5,23 +5,9 @@ using UnityEngine;
 
 namespace Project.GameDb.ScriptableDatabase{
     public abstract class BaseScriptableTable<TData> : ScriptableObject{
-        [SerializeField] protected TData[] tableOfData;
-        private Dictionary<int, TData> m_table;
-
-        protected abstract void GetIds(ref int[] ids);
-
-        public IEnumerator LoadTable(){
-            m_table = new Dictionary<int, TData>();
-            int[] ids = new int[tableOfData.Length];
-            GetIds(ref ids);
-
-            for(int i = 0; i < ids.Length; ++i){
-                m_table.Add(ids[i], tableOfData[i]);
-            }
-
-            yield return null;
-        }
-        public IEnumerator UnloadTable(){
+        protected Dictionary<int, TData> m_table;
+        public abstract IEnumerator LoadTable();
+        public virtual IEnumerator UnloadTable(){
             m_table = null;
             yield return null;
         }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff90a72351877c64e8ea45c95d05c896, type: 3}
+  m_Name: MaterialParam
+  m_EditorClassIdentifier: 
+  m_params:
+  - <MaterialType>k__BackingField: 1
+    <StepSoundId>k__BackingField: 0
+  - <MaterialType>k__BackingField: 2
+    <StepSoundId>k__BackingField: 1
+  - <MaterialType>k__BackingField: 3
+    <StepSoundId>k__BackingField: 2

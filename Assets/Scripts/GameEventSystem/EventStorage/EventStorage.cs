@@ -50,6 +50,9 @@ namespace Project.GameEventSystem
 
                 if (!m_events.ContainsKey(id))
                 {
+                    #if UNITY_EDITOR
+                    Debug.LogWarning($"There is no event with id: {id}");
+                    #endif
                     return null;
                 }
                 return m_events[id];

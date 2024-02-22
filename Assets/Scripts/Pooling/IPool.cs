@@ -13,7 +13,7 @@ namespace Project.Pooling
         public AutoExpandPool(int capacity = 10){
             _objects = new Queue<T>(capacity);
         }
-        public T Get()
+        public virtual T Get()
         {
             if(_objects.Count == 0){
                 return CreateNewObject();
@@ -21,7 +21,7 @@ namespace Project.Pooling
             return _objects.Dequeue();
         }
 
-        public void Return(T obj)
+        public virtual void Return(T obj)
         {
             if(obj == null){
                 return;

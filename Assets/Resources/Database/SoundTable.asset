@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20cf9c59ed052bf4cbc9d04a76418cf6, type: 3}
+  m_Name: SoundTable
+  m_EditorClassIdentifier: 
+  tableOfData:
+  - <SoundId>k__BackingField: 0
+    <Clip>k__BackingField: {fileID: 8300000, guid: c6e71e9ace0c0ff4ea51b00d00b96f70, type: 3}
+  - <SoundId>k__BackingField: 1
+    <Clip>k__BackingField: {fileID: 8300000, guid: b847eb539360f444cb0e9eaf36911452, type: 3}
+  - <SoundId>k__BackingField: 2
+    <Clip>k__BackingField: {fileID: 8300000, guid: 473303d8d530de441a799a15d8580954, type: 3}

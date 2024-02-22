@@ -1,4 +1,8 @@
 using System;
+using System.Collections;
+using Project.GameParams;
+using Project.Manager;
+using UnityEngine;
 
 namespace Project.GameEventSystem
 {
@@ -8,27 +12,31 @@ namespace Project.GameEventSystem
 
         public PhysicEventHandler(IEventAPI eventAPI) : base(eventAPI)
         {
-            MaterialDetectionCallback = HandleMaterialDetectionCallback;
+            MaterialDetectionCallback=HandleMaterialDetectionCallback;
         }
 
-        protected override void RegisterToAPI()
+        public override void RegisterToAPI()
         {
             m_eventAPI.MaterialDetectionEvent.Subscribe(MaterialDetectionCallback);
         }
 
-        protected override void UnregisterFromAPI(){
+        public override void UnregisterFromAPI(){
             m_eventAPI.MaterialDetectionEvent.Unsubscribe(MaterialDetectionCallback);
         }
 
         void HandleMaterialDetectionCallback(MaterialDetectionEventData data){
-            //TODO call Physic api to detect the material.
-            // int MaterialId = Physic.DetectMaterial(DetectionType type);
-            // base on the feedback type from data, call another event
-
-            //swith(data.FeedbackType)
-            // sound =>
-            // get sound id from Sound database. int sound_id = SoundDb.GetSoundIdFromMaterialId(MaterialId)
-            // call m_eventAPI.PlaySoundEvent.Invoke(sound_id);
+            GameManager.Instance.CoroutineCommandQueue.Enqueue(RequestMaterialDetection(data.DectectionType, data.AtPosition));
         }
+
+        IEnumerator RequestMaterialDetection(Enums.MaterialDectectionType type, UnityEngine.Vector2 atPosition){
+            yield return new WaitForFixedUpdate();
+            //TODO call Physic api to detect the material.
+
+            Enums.MaterialType materialType = Enums.MaterialType.Grass;
+            IMaterialParamAPI materialAPI = GameManager.Params.GetParamAPI<IMaterialParamAPI>();
+            int sound_id = materialAPI.GetSoundId(materialType);
+
+            m_eventAPI.PlaySoundEvent.Invoke(sound_id);
+        } 
     }
 }

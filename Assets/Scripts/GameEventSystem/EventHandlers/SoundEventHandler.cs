@@ -1,5 +1,6 @@
 using System;
 using Project.AudioSystem;
+using Project.Manager;
 
 namespace Project.GameEventSystem
 {
@@ -16,22 +17,27 @@ namespace Project.GameEventSystem
             PlaySoundCallback = HandleSoundCallback;
         }
 
-        protected override void RegisterToAPI(){
+        public override void RegisterToAPI(){
+
             m_eventAPI.PlaySoundEvent.Subscribe(FullPlaySoundCallback);
             m_eventAPI.PlaySoundEvent.Subscribe(PlaySoundCallback);
         }
 
-        protected override void UnregisterFromAPI(){
+        public override void UnregisterFromAPI(){
             m_eventAPI.PlaySoundEvent.Unsubscribe(FullPlaySoundCallback);
+            m_eventAPI.PlaySoundEvent.Unsubscribe(PlaySoundCallback);
         }
 
         void HandleFullSoundCallback(SoundEventData data){
             //TODO request API to get sound clip then tell AudioManager to play it
+            UnityEngine.Debug.Log($"FullSoundCallback: id: {data.SoundId}, volume: {data.Volume}");
         }
 
         void HandleSoundCallback(int id)
         {
             //TODO request API to get sound clip then tell AudioManager to play it
+            var operation = GameManager.RepoProvider.SoundRepository.GetEntity(id);
+            operation.Completed += (op) => AudioManager.Instance.PlaySoundFX(op.Result.Clip, 1);
         }
     }
 }

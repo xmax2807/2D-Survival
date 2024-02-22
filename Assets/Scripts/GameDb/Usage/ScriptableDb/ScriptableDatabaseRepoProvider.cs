@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Project.GameDb.ScriptableDatabase
@@ -6,7 +7,7 @@ namespace Project.GameDb.ScriptableDatabase
     /// Factory repository provider
     /// </summary>
     [CreateAssetMenu(fileName = "DatabaseRepoProvider", menuName = "ScriptableDatabase/RepositoryProvider")]
-    public class ScriptableDatabaseRepoProvider : IDatabaseRepoProvider
+    public class ScriptableDatabaseRepoProvider : ScriptableObject, IDatabaseRepoProvider
     {
         [SerializeField] ScriptableDatabase Database;
         public IReadDatabaseRepository<SoundData> SoundRepository => GetSoundRepository();
@@ -20,6 +21,10 @@ namespace Project.GameDb.ScriptableDatabase
             }
         }
         #endif
+
+        public IEnumerator Initialize(){
+            yield return Database.Initialize();
+        }
 
         private IReadDatabaseRepository<VFXData> GetVFXRepository()
         {

@@ -19,7 +19,9 @@ namespace Project.GameEvent
     public class GameEventService : IGameEventRegister, IGameEventPublisher
     {
         private readonly Dictionary<GameEventType, List<Delegate>> _eventMap;
+        private readonly List<GameEventSystem.EventHandler> _eventHandlers;
         public GameEventService(){
+            _eventHandlers = new List<GameEventSystem.EventHandler>();
             _eventMap = new Dictionary<GameEventType, List<Delegate>>();
         }
         public void Unregister<TData>(GameEventType type, Action<TData> callback)
@@ -41,6 +43,19 @@ namespace Project.GameEvent
                 foreach(var callback in _eventMap[type]){
                     (callback as Action<TData>)?.Invoke(data);
                 }
+            }
+        }
+
+        public void AddHandler(Project.GameEventSystem.EventHandler handler){
+            if(!_eventHandlers.Contains(handler)){
+                handler.RegisterToAPI();
+                _eventHandlers.Add(handler);
+            }
+        }
+        public void RemoveHandler(Project.GameEventSystem.EventHandler handler){
+            if(_eventHandlers.Contains(handler)){
+                handler.UnregisterFromAPI();
+                _eventHandlers.Remove(handler);
             }
         }
     }

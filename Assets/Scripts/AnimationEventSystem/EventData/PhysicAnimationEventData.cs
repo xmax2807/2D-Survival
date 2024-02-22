@@ -27,8 +27,8 @@ namespace Project.AnimationEventSystem
 
         protected override void MapFromStrings(string[] data)
         {
-            MaterialDectectionType = (MaterialDectectionType)System.Enum.Parse(typeof(MaterialDectectionType), data[0]);
-            ActionType = (ActionType)System.Enum.Parse(typeof(ActionType), data[1]);
+            MaterialDectectionType = (MaterialDectectionType)int.Parse(data[0]);
+            ActionType = (ActionType)int.Parse(data[1]);
         }
     }
 }

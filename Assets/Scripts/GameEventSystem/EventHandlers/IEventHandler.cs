@@ -7,11 +7,10 @@ namespace Project.GameEventSystem
 
         public EventHandler(IEventAPI eventAPI){
             m_eventAPI = eventAPI;
-            RegisterToAPI();
         }
 
-        protected virtual void RegisterToAPI(){}
-        protected virtual void UnregisterFromAPI(){}
+        public virtual void RegisterToAPI(){}
+        public virtual void UnregisterFromAPI(){}
 
         public void Dispose()
         {

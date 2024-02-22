@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Threading.Tasks;
+
 namespace Project.GameDb.ScriptableDatabase{
     internal class SoundRepository : BaseRepository<SoundData>
     {
@@ -12,7 +15,9 @@ namespace Project.GameDb.ScriptableDatabase{
 
         public override GameAsyncOperation<SoundData> GetEntity(int id)
         {
-            throw new System.NotImplementedException();
+            Task<SoundData> task = m_database.GetSound(id);
+            IEnumerator operation = new GameDb.TaskYieldInstruction(task);
+            return OperationManager.Instance.RequestOperation(operation, () => task.Result);
         }
     }
 }

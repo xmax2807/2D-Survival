@@ -24,9 +24,9 @@ namespace Project.Manager
         public IGameEventPublisher GameEventPublisher => _gameEventService;
         private GameEventService _gameEventService;
 
-        private ScriptableEventProvider _gameEventStorage;
-        public IEventInvoker GameEventInvoker => _gameEventStorage;
-        public IEventProvider GameEventProvider => _gameEventStorage;
+        private ScriptableEventProvider _gameEventProvider;
+        public IEventInvoker GameEventInvoker => _gameEventProvider;
+        public IEventProvider GameEventProvider => _gameEventProvider;
 
         private IEventAPI _gameEventAPI;
         public static IEventAPI GameEventAPI => _instance._gameEventAPI;
@@ -42,22 +42,45 @@ namespace Project.Manager
         public Queue<IEnumerator> CoroutineCommandQueue {get;private set;}
         #endregion
 
-        [SerializeField] InputHandler.InputHandler_InputSystem m_inputSystem;
+        #region Parameters
+        private GameParams.IParamProvider _params;
+        public static GameParams.IParamProvider Params => _instance._params;
+        #endregion
+
+        #region Database
+        private GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider m_scriptableDatabase;
+        public static GameDb.IDatabaseRepoProvider RepoProvider => _instance.m_scriptableDatabase;
+        #endregion
+
+        [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
         void OnEnable(){
-            _gameEventService = new GameEventService();
-            _gameEventStorage = Resources.Load<GameEventSystem.ScriptableEventProvider>("EventSystem_EventProvider");
+            
+            // Init Coroutines
+            Utils.Coroutines.Initialize(this);
+            CoroutineCommandQueue = new Queue<IEnumerator>();
+            StartCoroutine(RunQueueCommands());
+            //
+
+            _gameEventProvider = Resources.Load<GameEventSystem.ScriptableEventProvider>("EventSystem_EventProvider");
             _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
+            DefineEventHandlers();
+            
+            InitializeDatabase();
+            
             m_effectSystemConfiguration = Resources.Load<ScriptableEffectConfiguration>("EffectConfiguration");
+
+            GetParams();
+
             m_visibleRendererStorage = ScriptableObject.CreateInstance<VisibleRendererStorage>();
             TargetEffectEventManager = TargetEffectEventManager.Create(m_effectSystemConfiguration.EventManager);
-            CoroutineCommandQueue = new Queue<IEnumerator>();
         }
 
-        void Start(){
-            Utils.Coroutines.Initialize(this);
-            StartCoroutine(RunQueueCommands());
+        private void InitializeDatabase()
+        {
+            m_scriptableDatabase = Resources.Load<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>("ScriptableDatabaseRepoProvider");
+            CoroutineCommandQueue.Enqueue(m_scriptableDatabase.Initialize());
         }
 
         private IEnumerator RunQueueCommands()
@@ -70,6 +93,18 @@ namespace Project.Manager
                     yield return null;
                 }
             }
+        }
+
+        void DefineEventHandlers(){
+            _gameEventService = new GameEventService();
+            _gameEventService.AddHandler(new GameEventSystem.SoundEventHandler(_gameEventAPI));
+            _gameEventService.AddHandler(new GameEventSystem.PhysicEventHandler(_gameEventAPI));
+        }
+        void GetParams()
+        {
+            GameParams.ScriptableParamProvider _LoadParams = Resources.Load<GameParams.ScriptableParamProvider>("ParamProvider");
+            _LoadParams.Initialize();
+            _params = _LoadParams;
         }
     }
 }

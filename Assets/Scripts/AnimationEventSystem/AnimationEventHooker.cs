@@ -9,6 +9,7 @@ namespace Project.AnimationEventSystem{
 
             AnimationEventData animationEventData = m_animationEventDb.GetDataFromPool(event_id);
             
+            animationEventData.Invoker = this.gameObject;
             animationEventData.MapFromString(event_params);
             m_eventInvoker.Invoke(event_id, animationEventData);
             

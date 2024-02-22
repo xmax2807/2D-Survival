@@ -6,9 +6,9 @@ namespace Project.AnimationEventSystem
         Wall = 2
     }
 
-    public enum ActionType : byte{
-        None,
-        PlaySound,
-        PlayParticle
+    public enum ActionType : int{
+        None = -1,
+        PlaySound = 0,
+        PlayParticle = 1
     }
 }

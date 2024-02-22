@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Project.GameEventSystem
 {
     [System.Serializable]

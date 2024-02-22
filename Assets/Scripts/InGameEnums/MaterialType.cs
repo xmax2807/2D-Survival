@@ -4,7 +4,8 @@ namespace Project.Enums
     {
         None = 0,
         Metal = 1,
-        Wood = 2
+        Wood = 2,
+        Grass = 3,
     }
     public enum MaterialDectectionType : byte{
         Floor,

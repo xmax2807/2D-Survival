@@ -13,21 +13,23 @@ namespace Project.AnimationEventSystem.UsageInProject
         }
 
         private object ConvertToMaterialDetectionEventData(MaterialDetectionEventData data){
-            Project.Enums.MaterialDectectionType detectionType;
+            Enums.MaterialDectectionType detectionType;
             switch(data.MaterialDectectionType){
-                case MaterialDectectionType.Floor: detectionType = Project.Enums.MaterialDectectionType.Floor; break;
-                case MaterialDectectionType.Body: detectionType = Project.Enums.MaterialDectectionType.Body; break;
-                case MaterialDectectionType.Wall: detectionType = Project.Enums.MaterialDectectionType.Wall; break;
+                case MaterialDectectionType.Floor: detectionType = Enums.MaterialDectectionType.Floor; break;
+                case MaterialDectectionType.Body: detectionType = Enums.MaterialDectectionType.Body; break;
+                case MaterialDectectionType.Wall: detectionType = Enums.MaterialDectectionType.Wall; break;
                 default: detectionType = Project.Enums.MaterialDectectionType.Floor; break;
             }
 
-            Project.Enums.FeedbackType feedbackType;
+            Enums.FeedbackType feedbackType;
             switch(data.ActionType){
-                case ActionType.PlaySound: feedbackType = Project.Enums.FeedbackType.PlaySound; break;
-                case ActionType.PlayParticle: feedbackType = Project.Enums.FeedbackType.PlayParticle; break;
-                default: feedbackType = Project.Enums.FeedbackType.None; break;
+                case ActionType.PlaySound: feedbackType = Enums.FeedbackType.PlaySound; break;
+                case ActionType.PlayParticle: feedbackType = Enums.FeedbackType.PlayParticle; break;
+                default: feedbackType = Enums.FeedbackType.None; break;
             }
-            return new Project.GameEventSystem.MaterialDetectionEventData(detectionType, feedbackType);
+
+            UnityEngine.Vector2 position = data.Invoker.transform.position;
+            return new GameEventSystem.MaterialDetectionEventData(detectionType, feedbackType, position);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace Project.GameDb.ScriptableDatabase{
@@ -5,6 +6,15 @@ namespace Project.GameDb.ScriptableDatabase{
     public class ScriptableDatabase : ScriptableObject{
         [SerializeField] BaseScriptableTable<SoundData> m_soundTable;
         [SerializeField] BaseScriptableTable<VFXData> m_vfxTable;
+
+        public IEnumerator Initialize(){
+            if(m_soundTable != null){
+                yield return m_soundTable.LoadTable();
+            }
+            if(m_vfxTable != null){
+                yield return m_vfxTable.LoadTable();
+            }
+        }
 
         public Task<SoundData> GetSound(int id){
             return m_soundTable.GetEntity(id);
