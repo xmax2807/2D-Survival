@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.GameDb.ScriptableDatabase
@@ -7,12 +8,9 @@ namespace Project.GameDb.ScriptableDatabase
     /// Factory repository provider
     /// </summary>
     [CreateAssetMenu(fileName = "DatabaseRepoProvider", menuName = "ScriptableDatabase/RepositoryProvider")]
-    public class ScriptableDatabaseRepoProvider : ScriptableObject, IDatabaseRepoProvider
+    public class ScriptableDatabaseRepoProvider : ScriptableObject, IDatabaseRepoProvider, IDatabaseReposSubscription
     {
         [SerializeField] ScriptableDatabase Database;
-        public IReadDatabaseRepository<SoundData> SoundRepository => GetSoundRepository();
-
-        public IReadDatabaseRepository<VFXData> VFXRepository => GetVFXRepository();
 
         #if UNITY_EDITOR
         void OnValidate(){
@@ -24,27 +22,32 @@ namespace Project.GameDb.ScriptableDatabase
 
         public IEnumerator Initialize(){
             yield return Database.Initialize();
+            AddRepository<ISoundRepository>(new SoundRepository(Database));
+            AddRepository<IVFXRepository>(new VFXRepository(Database));
         }
 
-        private IReadDatabaseRepository<VFXData> GetVFXRepository()
+        public TRepository GetRepository<TRepository>()
         {
-            if(m_vfxRepository == null){
-                m_vfxRepository = new VFXRepository(Database);
-            }
-            return m_vfxRepository;
+            return (TRepository)m_repositories[typeof(TRepository).Name];
         }
 
-        private IReadDatabaseRepository<SoundData> GetSoundRepository(){
-            if(m_soundRepository == null){
-                m_soundRepository = new SoundRepository(Database);
+        public void AddRepository<TRepository>(TRepository instance)
+        {
+            if(!m_repositories.ContainsKey(typeof(TRepository).Name)){
+                m_repositories.Add(typeof(TRepository).Name, instance);
             }
-            return m_soundRepository;
+        }
+
+        public void RemoveRepository<TRepository>()
+        {
+            if(m_repositories.ContainsKey(typeof(TRepository).Name)){
+                m_repositories.Remove(typeof(TRepository).Name);
+            }
         }
 
 
         #region Caches
-        IReadDatabaseRepository<SoundData> m_soundRepository;
-        IReadDatabaseRepository<VFXData> m_vfxRepository;
+        Dictionary<string, object> m_repositories = new();
         #endregion Caches
     }
 }

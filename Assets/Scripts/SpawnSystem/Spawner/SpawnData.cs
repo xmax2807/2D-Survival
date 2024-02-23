@@ -70,5 +70,8 @@ namespace Project.SpawnSystem
 
         [SerializeField] private uint _expAmount;
         public uint ExpAmount => _expAmount;
+
+        [SerializeField] private uint _goldAmount;
+        public uint GoldAmount => _goldAmount;
     }
 }

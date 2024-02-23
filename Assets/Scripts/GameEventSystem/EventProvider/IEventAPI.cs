@@ -10,5 +10,14 @@ namespace Project.GameEventSystem
 
         //Physic events
         IEventController MaterialDetectionEvent {get;}
+
+        //Inventory
+        IEventController InventoryItemAddedEvent {get;}
+        IEventController InventoryItemRemovedEvent {get;}
+
+        //Drops
+        IEventController DropGoldEvent {get;}
+        IEventController DropEXPEvent {get;}
+        IEventController DropItemEvent {get;}
     }
 }

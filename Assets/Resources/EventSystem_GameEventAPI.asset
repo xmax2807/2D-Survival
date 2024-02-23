@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: EventSystem_GameEventAPI
   m_EditorClassIdentifier: 
   m_eventStorage: {fileID: 11400000, guid: 36d44237c1f342a41aef6311ec36808d, type: 2}
-  id_GameStartEvent: 1
-  id_GameEndEvent: 2
-  id_SplashScreenCompleted: 3
-  id_PlayerChanged: 4
-  id_PlaySoundEvent: 5
-  id_MaterialDetectionEvent: 6
+  m_eventIds:
+    id_GameStartEvent: 0
+    id_GameEndEvent: 1
+    id_SplashScreenCompleted: 2
+    id_PlayerChanged: 3
+    id_PlaySoundEvent: 4
+    id_MaterialDetectionEvent: 5
+    id_InventoryItemAdded: 6
+    id_InventoryItemRemoved: 7
+    id_DropGoldEvent: 8
+    id_DropEXPEvent: 9
+    id_DropItemEvent: 10

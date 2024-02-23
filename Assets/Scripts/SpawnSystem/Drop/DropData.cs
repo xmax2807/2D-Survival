@@ -7,9 +7,10 @@ namespace Project.SpawnSystem
     /// </summary>
     public class DropData{
         public readonly DropItem[] items;
-        public readonly uint ExpAmount;
+        public readonly int ExpAmount;
+        public readonly int GoldAmount;
 
-        public DropData(DropItem[] items, uint expAmount){
+        public DropData(DropItem[] items, int expAmount, int goldAmount){
             if(items == null){
                 this.items = Array.Empty<DropItem>();
             }
@@ -18,6 +19,15 @@ namespace Project.SpawnSystem
                 Array.Copy(items, this.items, items.Length);
             }
             ExpAmount = expAmount;
+            GoldAmount = goldAmount;
+        }
+
+        public int[] GetItemIds(){
+            int[] result = new int[items.Length];
+            for(int i = 0; i < items.Length; ++i){
+                result[i] = items[i].ItemId;
+            }
+            return result;
         }
     }
 

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: InProject_EventInvoker
   m_EditorClassIdentifier: 
   m_converterDb: {fileID: 11400000, guid: fcc85b853bc380d42a238469fa69bd76, type: 2}
-  m_animationEventMapId:
-  - ProjectId: 5
-    AnimationEventId: 0
-  - ProjectId: 6
-    AnimationEventId: 2
   m_projectEventProvider: {fileID: 11400000, guid: b733518f9a799044283e6a69903b317c, type: 2}
+  m_animationEventMapId:
+  - ProjectId: 4
+    AnimationEventId: 0
+  - ProjectId: 5
+    AnimationEventId: 2

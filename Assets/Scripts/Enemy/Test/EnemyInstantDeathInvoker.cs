@@ -13,7 +13,6 @@ namespace Project.Enemy
         private void Notify(){
             if(m_notifier == null){
                 m_notifier = core.GetCoreComponent<IEnemyStateInvoker>();
-                Debug.Log(m_notifier);
             }
             m_notifier.NotifyDeathEvent(new EnemyDeathData(id: core.GetId(), killerId: playerId, 0, 0));
         }

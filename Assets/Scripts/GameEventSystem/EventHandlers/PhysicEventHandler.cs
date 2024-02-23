@@ -8,7 +8,7 @@ namespace Project.GameEventSystem
 {
     public class PhysicEventHandler : EventHandler
     {
-        Action<MaterialDetectionEventData> MaterialDetectionCallback;
+        readonly Action<MaterialDetectionEventData> MaterialDetectionCallback;
 
         public PhysicEventHandler(IEventAPI eventAPI) : base(eventAPI)
         {
@@ -31,7 +31,6 @@ namespace Project.GameEventSystem
         IEnumerator RequestMaterialDetection(Enums.MaterialDectectionType type, UnityEngine.Vector2 atPosition){
             yield return new WaitForFixedUpdate();
             //TODO call Physic api to detect the material.
-
             Enums.MaterialType materialType = Enums.MaterialType.Grass;
             IMaterialParamAPI materialAPI = GameManager.Params.GetParamAPI<IMaterialParamAPI>();
             int sound_id = materialAPI.GetSoundId(materialType);

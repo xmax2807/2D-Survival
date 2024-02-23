@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using Project.AnimationEventSystem;
-using Project.Manager;
 using UnityEngine;
 
 namespace Project.AudioSystem
