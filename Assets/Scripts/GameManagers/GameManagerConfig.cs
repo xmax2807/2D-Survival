@@ -17,7 +17,7 @@ namespace Project.Manager
         #region Effect Config
         private ScriptableEffectConfiguration m_effectSystemConfiguration;
         public IEffectEventPublisher EffectEventPublisher => m_effectSystemConfiguration;
-        public TargetEffectEventManager TargetEffectEventManager {get;private set;}
+        public TargetEffectEventManager TargetEffectEventManager { get; private set; }
         #endregion
 
         #region Game Event Config
@@ -40,7 +40,7 @@ namespace Project.Manager
         #endregion
 
         #region Utils
-        public Queue<IEnumerator> CoroutineCommandQueue {get;private set;}
+        public Queue<IEnumerator> CoroutineCommandQueue { get; private set; }
         #endregion
 
         #region Parameters
@@ -61,8 +61,9 @@ namespace Project.Manager
         [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
-        void OnEnable(){
-            
+        void OnEnable()
+        {
+
             // Init Coroutines
             Utils.Coroutines.Initialize(this);
             CoroutineCommandQueue = new Queue<IEnumerator>();
@@ -72,12 +73,12 @@ namespace Project.Manager
             _gameEventProvider = Resources.Load<GameEventSystem.ScriptableEventProvider>("EventSystem_EventProvider");
             _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
             DefineEventHandlers();
-            
+
             InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider");
             InitializeLootSystem(filePath: "LootSystemConfiguration");
 
             GetParams();
-            
+
             m_effectSystemConfiguration = Resources.Load<ScriptableEffectConfiguration>("EffectConfiguration");
 
 
@@ -99,17 +100,21 @@ namespace Project.Manager
 
         private IEnumerator RunQueueCommands()
         {
-            while(true){
-                if(CoroutineCommandQueue.Count > 0){
+            while (true)
+            {
+                if (CoroutineCommandQueue.Count > 0)
+                {
                     yield return CoroutineCommandQueue.Dequeue();
                 }
-                else{
+                else
+                {
                     yield return null;
                 }
             }
         }
 
-        void DefineEventHandlers(){
+        void DefineEventHandlers()
+        {
             _gameEventService = new GameEventService();
             _gameEventService.AddHandler(new SoundEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new PhysicEventHandler(_gameEventAPI));
