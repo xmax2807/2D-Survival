@@ -1,9 +1,14 @@
 using System;
+using Project.LootSystem;
+using Project.Manager;
+using UnityEngine;
 
 namespace Project.GameEventSystem
 {
     public class ItemDropEventHandler : EventHandler
     {
+        private ILootSystemAPI _lootAPI;
+        ILootSystemAPI LootAPI => _lootAPI ??= GameManager.LootSystem;
         readonly Action<int> GoldDropCallback;
         readonly Action<int> ExpDropCallback;
         readonly Action<int[]> ItemDropCallback;
@@ -29,18 +34,17 @@ namespace Project.GameEventSystem
         public void OnGoldDrop(int amount){
             //TODO: call loot system to drop gold
             //test
-            UnityEngine.Debug.Log("Gold dropped: " + amount);
+            Vector2 randomPos = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-5f, 5f));
+            LootAPI.DropGold(amount, randomPos);
         }
         public void OnExpDrop(int amount){
             //TODO: call loot system to drop exp
             //test
-            UnityEngine.Debug.Log("Exp dropped: " + amount);
         }
         public void OnItemDrop(int[] itemIds){
             //TODO: call loot system to drop items
 
             //test
-            UnityEngine.Debug.Log("Item dropped: " + itemIds?.Length);
         }
     }
 }

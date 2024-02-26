@@ -7,6 +7,7 @@ using Project.GameEvent;
 using Project.GameEventSystem;
 using Project.InputHandler;
 using Project.LOD;
+using Project.LootSystem;
 using UnityEngine;
 
 namespace Project.Manager
@@ -52,6 +53,11 @@ namespace Project.Manager
         public static GameDb.IDatabaseRepoProvider RepoProvider => _instance.m_scriptableDatabase;
         #endregion
 
+        #region LootSystem
+        private LootSystemConfiguration m_lootSystemConfiguration;
+        public static ILootSystemAPI LootSystem => _instance.m_lootSystemConfiguration.LootSystem;
+        #endregion
+
         [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
@@ -67,19 +73,27 @@ namespace Project.Manager
             _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
             DefineEventHandlers();
             
-            InitializeDatabase();
+            InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider");
+            InitializeLootSystem(filePath: "LootSystemConfiguration");
+
+            GetParams();
             
             m_effectSystemConfiguration = Resources.Load<ScriptableEffectConfiguration>("EffectConfiguration");
 
-            GetParams();
 
             m_visibleRendererStorage = ScriptableObject.CreateInstance<VisibleRendererStorage>();
             TargetEffectEventManager = TargetEffectEventManager.Create(m_effectSystemConfiguration.EventManager);
         }
 
-        private void InitializeDatabase()
+        private void InitializeLootSystem(string filePath)
         {
-            m_scriptableDatabase = Resources.Load<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>("ScriptableDatabaseRepoProvider");
+            m_lootSystemConfiguration = Resources.Load<LootSystemConfiguration>(filePath);
+            m_lootSystemConfiguration.Initialize(this.transform);
+        }
+
+        private void InitializeDatabase(string filePath)
+        {
+            m_scriptableDatabase = Resources.Load<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
             CoroutineCommandQueue.Enqueue(m_scriptableDatabase.Initialize());
         }
 

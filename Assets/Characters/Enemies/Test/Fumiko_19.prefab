@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 8323406513634989081}
-  playerId: -85930
+  rewardableEntityRegistry: {fileID: 11400000, guid: ad9e5bf9a35734d44a85ae0aec7a70f2, type: 2}
 --- !u!114 &9004698728316920663
 MonoBehaviour:
   m_ObjectHideFlags: 0

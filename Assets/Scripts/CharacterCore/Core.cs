@@ -21,6 +21,6 @@ namespace Project.CharacterBehaviour
             m_components??= new Dictionary<string, ICoreComponent>();
             m_components[typeof(TComponent).ToString()] = component;
         }
-        public virtual int GetId() => GetInstanceID();
+        public virtual int GetId() => gameObject.GetInstanceID();
     }
 }

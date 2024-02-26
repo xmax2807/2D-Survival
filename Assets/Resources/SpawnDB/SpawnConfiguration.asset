@@ -32,11 +32,13 @@ MonoBehaviour:
           value: 100
         ItemId: 0
       _expAmount: 2
+      _goldAmount: 100
     - _entityID: 1
       _spawnRate:
         value: 10
       _dropItems: []
       _expAmount: 10
+      _goldAmount: 500
     _waveData:
       _entityID: 0
       _count: 0
