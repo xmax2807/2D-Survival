@@ -16,7 +16,7 @@ namespace Project.GameEvent
     public interface IGameEventPublisher{
         void Publish<TData>(GameEventType type, TData data);
     }
-    public class GameEventService : IGameEventRegister, IGameEventPublisher
+    public class GameEventService : IGameEventRegister, IGameEventPublisher, IDisposable
     {
         private readonly Dictionary<GameEventType, List<Delegate>> _eventMap;
         private readonly List<GameEventSystem.EventHandler> _eventHandlers;
@@ -56,6 +56,13 @@ namespace Project.GameEvent
             if(_eventHandlers.Contains(handler)){
                 handler.UnregisterFromAPI();
                 _eventHandlers.Remove(handler);
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach(var handler in _eventHandlers){
+                handler.Dispose();
             }
         }
     }

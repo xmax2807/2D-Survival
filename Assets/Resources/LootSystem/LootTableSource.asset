@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ccbe2305b743c41bbc79da8f1503cd, type: 3}
+  m_Name: LootTableSource
+  m_EditorClassIdentifier: 
+  goldPrefab: {fileID: 8538420294419503210, guid: d343dcb6f88a94e439a336fa6b6f5be1, type: 3}
+  goldLootFeedbacks:
+  - <Type>k__BackingField: 1
+    <soundId>k__BackingField: 3
+    <volume>k__BackingField: 1
+    <vfxId>k__BackingField: 0

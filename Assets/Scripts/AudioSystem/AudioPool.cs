@@ -29,6 +29,8 @@ namespace Project.AudioSystem
         public override void Return(AudioSource source){
             if(source == null) return;
             base.Return(source);
+            
+            source.clip = null;
             source.gameObject.SetActive(false);
         }
     }

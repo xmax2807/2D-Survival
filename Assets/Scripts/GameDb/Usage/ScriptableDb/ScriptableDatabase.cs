@@ -16,10 +16,10 @@ namespace Project.GameDb.ScriptableDatabase{
             }
         }
 
-        public Task<SoundData> GetSound(int id){
+        public SoundData GetSound(int id){
             return m_soundTable.GetEntity(id);
         }
-        public Task<VFXData> GetVFX(int id){
+        public VFXData GetVFX(int id){
             return m_vfxTable.GetEntity(id);
         }
     }

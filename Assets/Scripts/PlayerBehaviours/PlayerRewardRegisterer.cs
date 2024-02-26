@@ -7,8 +7,11 @@ namespace Project.PlayerBehaviour
     public class PlayerRewardRegisterer : MonoCoreComponent, IRewardableEntity
     {
         [SerializeField] private ScriptableRewardableEntityRegistry _registry;
+
+        public int Id => Core.GetId();
+
         protected override void AfterAwake(){
-            _registry.Register(Core.GetId(), this);
+            _registry.Register(Id, this);
         }
         public float GetDropBonus()
         {
@@ -17,17 +20,25 @@ namespace Project.PlayerBehaviour
 
         public float GetExpBonus()
         {
-            return 0;
+            return 1;
+        }
+        public float GetGoldBonus()
+        {
+            return 1;
         }
 
-        public void GiveExp(uint amount)
+        public void GiveExp(int amount)
         {
             //TODO
         }
 
-        public void GiveItems(params uint[] ids)
+        public void GiveItems(params int[] ids)
         {
             //TODO
+        }
+
+        public void GiveGold(int amount)
+        {
         }
     }
 }

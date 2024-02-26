@@ -12,8 +12,9 @@ namespace Project.GameDb.ScriptableDatabase{
             yield return null;
         }
 
-        public Task<TData> GetEntity(int id){
-            return Task.FromResult(m_table[id]);
+        public TData GetEntity(int id){
+            return m_table[id];
         }
+        public virtual Task<TData> GetEntityAsync(int id) => Task.FromResult(m_table[id]);
     }
 }

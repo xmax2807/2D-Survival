@@ -1,13 +1,13 @@
 using System;
 using Project.AudioSystem;
+using Project.GameDb.ScriptableDatabase;
 using Project.Manager;
 
 namespace Project.GameEventSystem
 {
     public class SoundEventHandler : EventHandler
     {
-        //TODO: Sound database from constructor
-        //readonly SoundDatabase soundDatabase;
+        readonly Lazy<ISoundRepository> _lazySoundRepo;
         readonly Action<SoundEventData> FullPlaySoundCallback;
         readonly Action<int> PlaySoundCallback;
 
@@ -15,6 +15,8 @@ namespace Project.GameEventSystem
         {
             FullPlaySoundCallback = HandleFullSoundCallback;
             PlaySoundCallback = HandleSoundCallback;
+
+            _lazySoundRepo = new Lazy<ISoundRepository>(() => GameManager.RepoProvider.GetRepository<ISoundRepository>());
         }
 
         public override void RegisterToAPI(){
@@ -30,14 +32,17 @@ namespace Project.GameEventSystem
 
         void HandleFullSoundCallback(SoundEventData data){
             //TODO request API to get sound clip then tell AudioManager to play it
-            UnityEngine.Debug.Log($"FullSoundCallback: id: {data.SoundId}, volume: {data.Volume}");
+            GameDb.SoundData soundData = GameManager.RepoProvider.GetRepository<ISoundRepository>()?.GetSound(data.SoundId);
+            if (soundData == null) return;
+            AudioManager.Instance.PlaySoundFX(soundData.Clip, data.Volume);
         }
 
         void HandleSoundCallback(int id)
         {
             //TODO request API to get sound clip then tell AudioManager to play it
-            var operation = GameManager.RepoProvider.SoundRepository.GetEntity(id);
-            operation.Completed += (op) => AudioManager.Instance.PlaySoundFX(op.Result.Clip, 1);
+            GameDb.SoundData data = _lazySoundRepo.Value?.GetSound(id);
+            if (data == null) return;
+            AudioManager.Instance.PlaySoundFX(data.Clip, 1);
         }
     }
 }

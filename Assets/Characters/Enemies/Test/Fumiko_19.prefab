@@ -275,13 +275,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2718756354039425860}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ac8bf87c37a68c42b1fa76b0b04ef66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 8323406513634989081}
-  playerId: -85930
+  rewardableEntityRegistry: {fileID: 11400000, guid: ad9e5bf9a35734d44a85ae0aec7a70f2, type: 2}
 --- !u!114 &9004698728316920663
 MonoBehaviour:
   m_ObjectHideFlags: 0

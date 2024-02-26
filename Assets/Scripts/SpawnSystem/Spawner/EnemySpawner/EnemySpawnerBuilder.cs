@@ -27,7 +27,7 @@ namespace Project.SpawnSystem
             uint[] entityIds = new uint[entityDatas.Length];
             for(int i = 0; i < entityDatas.Length; ++i){
                 entityIds[i] = entityDatas[i].EntityID;
-                m_buildableSpawner.AddDropFor(entityDatas[i].EntityID, new DropData(entityDatas[i].DropItems, entityDatas[i].ExpAmount));
+                m_buildableSpawner.AddDropFor(entityDatas[i].EntityID, new DropData(entityDatas[i].DropItems, (int)entityDatas[i].ExpAmount, (int)entityDatas[i].GoldAmount));
             }
             m_buildableSpawner.AddSpawnEntities(entityIds);
             m_buildableSpawner.GetStorageRepositoryFrom(storageGetter);

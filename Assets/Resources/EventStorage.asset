@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1dd91fad425b40950724d6743335e, type: 3}
   m_Name: EventStorage
   m_EditorClassIdentifier: 
-  id_GameStartEvent: 1
-  id_GameEndEvent: 2
-  id_SplashScreenCompleted: 3
-  id_PlayerChanged: 4
-  id_SoundRequestEvent: 5
-  id_MaterialDetectionRequestEvent: 6
+  m_eventIds:
+    id_GameStartEvent: 0
+    id_GameEndEvent: 1
+    id_SplashScreenCompleted: 2
+    id_PlayerChanged: 3
+    id_SoundRequestEvent: 4
+    id_MaterialDetectionRequestEvent: 5
+    id_InventoryItemAddedEvent: 6
+    id_InventoryItemRemovedEvent: 7
+    id_DropGoldEvent: 8
+    id_DropEXPEvent: 9
+    id_DropItemEvent: 10

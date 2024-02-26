@@ -1,8 +1,11 @@
 namespace Project.GameDb
 {
+    public interface IDatabaseReposSubscription{
+        void AddRepository<TRepository>(TRepository instance);
+        void RemoveRepository<TRepository>();
+    }
     public interface IDatabaseRepoProvider
     {
-        IReadDatabaseRepository<SoundData> SoundRepository {get;}
-        IReadDatabaseRepository<VFXData> VFXRepository {get;}
+        TRepository GetRepository<TRepository>();
     }
 }

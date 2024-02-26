@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd452e5ab70951541b0f6383874e3c03, type: 3}
-  m_Name: DropManager
+  m_Script: {fileID: 11500000, guid: 552d73185cb7c7f48aa427461e56178e, type: 3}
+  m_Name: EventFeedbackBuilder
   m_EditorClassIdentifier: 
-  _expDropLogicType: 0
-  _itemDropLogicType: 0
-  _rewardableEntityRegistry: {fileID: 11400000, guid: ad9e5bf9a35734d44a85ae0aec7a70f2, type: 2}
+  id_eventPlaySound: 4
+  id_eventPlayVFX: 0
+  id_eventPopDetailUI: 0
+  m_eventProvider: {fileID: 11400000, guid: b733518f9a799044283e6a69903b317c, type: 2}

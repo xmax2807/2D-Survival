@@ -2,11 +2,14 @@ namespace Project.SpawnSystem
 {
     public interface IRewardableEntity
     {
-        void GiveExp(uint amount);
-        void GiveItems(params uint[] ids);
+        int Id { get; }
+        void GiveGold(int amount);
+        void GiveExp(int amount);
+        void GiveItems(params int[] ids);
 
         float GetDropBonus();
         float GetExpBonus();
+        float GetGoldBonus();
     }
 
     public interface IRewarableEntityRegistry
