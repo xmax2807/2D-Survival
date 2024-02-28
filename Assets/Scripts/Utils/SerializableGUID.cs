@@ -1,17 +1,18 @@
 using System;
+using MessagePack;
 using UnityEngine;
 namespace Project.Utils
 {
     /// <summary>
     /// Represents a globally unique identifier (GUID) that is serializable with Unity and usable in game scripts.
     /// </summary>
-    [Serializable]
+    [Serializable, MessagePackObject]
     public struct SerializableGuid : IEquatable<SerializableGuid>
     {
-        [SerializeField, HideInInspector] public uint Part1;
-        [SerializeField, HideInInspector] public uint Part2;
-        [SerializeField, HideInInspector] public uint Part3;
-        [SerializeField, HideInInspector] public uint Part4;
+        [SerializeField, HideInInspector, Key(0)] public uint Part1;
+        [SerializeField, HideInInspector, Key(1)] public uint Part2;
+        [SerializeField, HideInInspector, Key(2)] public uint Part3;
+        [SerializeField, HideInInspector, Key(3)] public uint Part4;
 
         public static SerializableGuid Empty => new(0, 0, 0, 0);
 
@@ -32,7 +33,7 @@ namespace Project.Utils
             Part4 = BitConverter.ToUInt32(bytes, 12);
         }
 
-        public static SerializableGuid NewGuid() => new SerializableGuid(Guid.NewGuid());
+        public static SerializableGuid NewGuid() => new(Guid.NewGuid());
 
         public static SerializableGuid FromHexString(string hexString)
         {
@@ -50,12 +51,12 @@ namespace Project.Utils
             );
         }
 
-        public string ToHexString()
+        public readonly string ToHexString()
         {
             return $"{Part1:X8}{Part2:X8}{Part3:X8}{Part4:X8}";
         }
 
-        public Guid ToGuid()
+        public readonly Guid ToGuid()
         {
             var bytes = new byte[16];
             BitConverter.GetBytes(Part1).CopyTo(bytes, 0);
@@ -68,17 +69,18 @@ namespace Project.Utils
         public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.ToGuid();
         public static implicit operator SerializableGuid(Guid guid) => new SerializableGuid(guid);
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             return obj is SerializableGuid guid && this.Equals(guid);
         }
+        public override readonly string ToString() => ToHexString();
 
-        public bool Equals(SerializableGuid other)
+        public readonly bool Equals(SerializableGuid other)
         {
             return Part1 == other.Part1 && Part2 == other.Part2 && Part3 == other.Part3 && Part4 == other.Part4;
         }
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return HashCode.Combine(Part1, Part2, Part3, Part4);
         }

@@ -1,56 +1,45 @@
 using System;
-using MessagePack;
-using UnityEngine;
 
 namespace Project.SaveSystem
 {
     public class SaveSystem
     {
-        bool isTesting = true;
-        string testFileName = "test";
-        string currentFileName;
+        readonly SaveSystemConfiguration configuration;
 
-        readonly BinaryFileDataService fileDataService;
+        public event Action<GameData> SaveGameLoadedEvent;
+        public event Action<bool> SaveGameSavedEvent;
+        GameData data;
 
-        public SaveSystem(){
-            fileDataService = new BinaryFileDataService(new MPSerializer(), Application.persistentDataPath);
-        }
+        string CurrentFileName => configuration.CurrentFileName;
+        IDataService FileDataService => configuration.DataService;
+        private SerializableGameData serializableSaveables;
 
-        public async void Save(){
-            string fileName = isTesting ? testFileName : currentFileName;
-
-            if(isTesting){
-                await fileDataService.SaveAsync(fileName, GameData.Randomize());
-            }
-        }
-
-        public async void Load(){
-            string fileName = isTesting ? testFileName : currentFileName;
-            if(isTesting){
-                GameData data = await fileDataService.LoadAsync<GameData>(fileName);
-                Debug.Log(data.ToString());
-            }
-        }
-    }
-
-    [System.Serializable, MessagePackObject(true)]
-    public class GameData
-    {
-        public string testString;
-        public int testInt;
-        public float testFloat;
-        public bool testBool;
-
-        public static GameData Randomize()
+        public SaveSystem(SaveSystemConfiguration config)
         {
-            return new GameData(){
-                testString = Guid.NewGuid().ToString(),
-                testInt = UnityEngine.Random.Range(0, 100),
-                testFloat = UnityEngine.Random.Range(0f, 1f),
-                testBool = UnityEngine.Random.Range(0, 10) > 5
-            };
+            this.configuration = config;
         }
 
-        public override string ToString() => $"string: {testString}, int: {testInt}, float: {testFloat}, bool: {testBool}";
+        public void NewGame(){
+            data = configuration.RequestNewData();
+            serializableSaveables = new SerializableGameData();
+        }
+
+        public async void Save()
+        {
+            if(data == null){
+                NewGame();
+            }
+            serializableSaveables.SetData(data.SaveablesDict);
+            bool result = await FileDataService.SaveAsync(CurrentFileName, serializableSaveables);
+            SaveGameSavedEvent?.Invoke(result);
+        }
+
+        public async void Load()
+        {
+            serializableSaveables = await FileDataService.LoadAsync<SerializableGameData>(CurrentFileName);
+            data = new GameData(serializableSaveables.ToDictionary());
+            SaveGameLoadedEvent?.Invoke(data);
+        }
     }
+    
 }

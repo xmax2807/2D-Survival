@@ -1,7 +1,7 @@
+using System;
 using System.IO;
 using System.Threading;
 using MessagePack;
-using Project.MessagePack.Resolvers;
 using UnityEngine;
 
 namespace Project.SaveSystem
@@ -11,9 +11,10 @@ namespace Project.SaveSystem
         private SaveSystem saveSystem;
         [SerializeField] bool isSave = true;
         [SerializeField] bool isLoad = false;
+        [SerializeField] SaveSystemConfiguration configuration;
 
         void Awake(){
-            saveSystem = new SaveSystem();
+            saveSystem = configuration.GetSaveSystem();
         }
 
         void Update(){

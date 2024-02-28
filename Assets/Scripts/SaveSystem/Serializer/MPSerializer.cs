@@ -33,7 +33,7 @@ namespace Project.SaveSystem
             if (!serializerRegistered)
             {
                 StaticCompositeResolver.Instance.Register(
-                    Project.MessagePack.Resolvers.GeneratedResolver.Instance,
+                    GeneratedResolver.Instance,
                     AttributeFormatterResolver.Instance,
                     PrimitiveObjectResolver.Instance,
                     StandardResolver.Instance
