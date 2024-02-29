@@ -18,12 +18,12 @@ namespace Project.Enemy
             m_notifier.NotifyDeathEvent(new EnemyDeathData(id: core.GetId(), killerId: rewardableEntityRegistry.First().Id, 0, 0));
         }
 
-        void Start(){
+        void OnEnable(){
             StartCoroutine(Run());
         }
 
         IEnumerator Run(){
-            yield return new WaitForEndOfFrame();
+            yield return null;
             Notify();
         }
     }

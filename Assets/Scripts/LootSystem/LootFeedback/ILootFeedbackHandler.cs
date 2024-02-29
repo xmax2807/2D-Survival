@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Project.LootSystem
 {
 
@@ -6,6 +8,6 @@ namespace Project.LootSystem
     /// </summary>
     public interface ILootFeedbackHandler
     {
-        void PlayFeedback(FeedbackData[] data);
+        void PlayFeedback(FeedbackData[] data, Transform pickerTransform = null);
     }
 }

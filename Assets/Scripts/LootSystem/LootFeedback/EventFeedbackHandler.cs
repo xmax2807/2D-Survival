@@ -17,11 +17,11 @@ namespace Project.LootSystem
             id_eventPlayVFX = eventIDs[1];
             id_eventPopDetailUI = eventIDs[2];
         }
-        public void PlayFeedback(FeedbackData[] feedbackData){
+        public void PlayFeedback(FeedbackData[] feedbackData, Transform pickerTransform = null){
             for(int i = 0; i < feedbackData.Length; ++i){
                 switch(feedbackData[i].Type){
-                    case FeedbackType.PlaySound: HandleInvokePlaySound(feedbackData[i]); break;
-                    case FeedbackType.PlayVFX: HandleInvokePlayVFX(feedbackData[i]); break;
+                    case FeedbackType.PlaySound: HandleInvokePlaySound(feedbackData[i], pickerTransform); break;
+                    case FeedbackType.PlayVFX: HandleInvokePlayVFX(feedbackData[i], pickerTransform); break;
                     case FeedbackType.PopDetailUI: HandleInvokePopDetailUI(feedbackData[i]); break;
                     default: break;
                 }
@@ -33,14 +33,15 @@ namespace Project.LootSystem
             throw new NotImplementedException();
         }
 
-        private void HandleInvokePlayVFX(FeedbackData feedbackData)
+        private void HandleInvokePlayVFX(FeedbackData feedbackData, Transform pickerTransform)
         {
-            throw new NotImplementedException();
+            VisualEffectEventData data = new(feedbackData.vfxId, pickerTransform);
+            m_eventProvider.Invoke(id_eventPlayVFX, data);
         }
 
-        private void HandleInvokePlaySound(FeedbackData feedbackData)
+        private void HandleInvokePlaySound(FeedbackData feedbackData, Transform _)
         {
-            SoundEventData data = new SoundEventData(feedbackData.soundId, feedbackData.volume);
+            SoundEventData data = new(feedbackData.soundId, feedbackData.volume);
             m_eventProvider.Invoke(id_eventPlaySound, data);
         }
     }

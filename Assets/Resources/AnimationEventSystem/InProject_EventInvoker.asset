@@ -17,5 +17,7 @@ MonoBehaviour:
   m_animationEventMapId:
   - ProjectId: 4
     AnimationEventId: 0
-  - ProjectId: 5
+  - ProjectId: 6
     AnimationEventId: 2
+  - ProjectId: 5
+    AnimationEventId: 1

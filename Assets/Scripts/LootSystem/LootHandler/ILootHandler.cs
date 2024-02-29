@@ -1,10 +1,11 @@
 using System;
+using UnityEngine;
 
 namespace Project.LootSystem
 {
     public interface ILootHandler
     {
-        event Action<IReadOnlyAutoLootContext> OnLootComplete;
+        event Action<IReadOnlyAutoLootContext, Transform> OnLootComplete;
         void HandleAutoLoot(IReadOnlyAutoLootContext context);
     }
 

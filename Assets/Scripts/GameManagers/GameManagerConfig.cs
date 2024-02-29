@@ -112,6 +112,7 @@ namespace Project.Manager
         void DefineEventHandlers(){
             _gameEventService = new GameEventService();
             _gameEventService.AddHandler(new SoundEventHandler(_gameEventAPI));
+            _gameEventService.AddHandler(new VisualEffectEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new PhysicEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new ItemEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new ItemDropEventHandler(_gameEventAPI));

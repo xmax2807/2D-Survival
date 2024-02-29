@@ -16,7 +16,7 @@ MonoBehaviour:
     stopConditions: []
     spawnTriggerType: 0
     spawnTime: 1
-    hasRepeat: 1
+    hasRepeat: 0
     intervalTime: 0.5
     repeatCondition:
       conditionType: 2
@@ -50,5 +50,5 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _contextData:
-      SpawnCount: 5
+      SpawnCount: 100
       SpawnPosition: 0

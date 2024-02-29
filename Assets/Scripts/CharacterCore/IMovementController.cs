@@ -14,6 +14,7 @@ namespace Project.CharacterBehaviour
 
     public class RigidBodyController2D : IMovementController
     {
+        bool isEnabled;
         Rigidbody2D m_rigidbody;
         private Vector2 m_direction;
         private Vector2 refVelocity;
@@ -29,6 +30,7 @@ namespace Project.CharacterBehaviour
         }
 
         public void Update(){
+            if(!isEnabled) return;
             if(m_direction == Vector2.zero && m_rigidbody.velocity == Vector2.zero) return;
 
             if(smoothTime == 0f){
@@ -50,11 +52,15 @@ namespace Project.CharacterBehaviour
 
         public void Enable()
         {
+            if(isEnabled) return;
+            isEnabled = true;
             m_rigidbody.WakeUp();
         }
 
         public void Disable()
         {
+            if(!isEnabled) return;
+            isEnabled = false;
             m_rigidbody.Sleep();
         }
     }

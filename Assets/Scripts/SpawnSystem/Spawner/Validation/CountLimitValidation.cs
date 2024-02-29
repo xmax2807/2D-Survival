@@ -2,7 +2,7 @@ namespace Project.SpawnSystem
 {
     public class TotalCountLimitValidation : ISpawnValidation
     {
-        private uint _limit;
+        private readonly uint _limit;
         public TotalCountLimitValidation(uint limit){
             _limit = limit;
         }
@@ -14,7 +14,7 @@ namespace Project.SpawnSystem
 
     public class ActiveCountLimitValidation : ISpawnValidation
     {
-        private uint _limit;
+        private readonly uint _limit;
         public ActiveCountLimitValidation(uint limit){
             _limit = limit;
         }

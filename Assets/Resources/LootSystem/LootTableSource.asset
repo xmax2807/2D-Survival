@@ -18,3 +18,7 @@ MonoBehaviour:
     <soundId>k__BackingField: 3
     <volume>k__BackingField: 1
     <vfxId>k__BackingField: 0
+  - <Type>k__BackingField: 2
+    <soundId>k__BackingField: 0
+    <volume>k__BackingField: 0
+    <vfxId>k__BackingField: 0

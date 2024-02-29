@@ -13,4 +13,16 @@ namespace Project.GameEventSystem
             Volume = volume;
         }
     }
+
+    [System.Serializable]
+    public class VisualEffectEventData 
+    {
+        public readonly int EffectId;
+        public readonly Transform Target;
+
+        public VisualEffectEventData(int effectId, Transform target){
+            EffectId = effectId;
+            Target = target;
+        }
+    }
 }

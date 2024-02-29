@@ -7,11 +7,12 @@ namespace Project.Enemy
     {
         [SerializeField] private Rigidbody2D _rigidbody2D; // for movement
         [SerializeField] private float _speed;
+        [SerializeField] private float _attackRange = 0.5f;
         IAIBehaviour m_movementController;
         private Core m_target;
 
         override protected void AfterAwake(){
-            m_movementController = new EnemyController(transform, _rigidbody2D, _speed);
+            m_movementController = new EnemyController(transform, _rigidbody2D, _speed, _attackRange);
         }
         public void OnTargetDetected(Core target)
         {

@@ -52,7 +52,7 @@ namespace Project.LootSystem
             m_LootHandler.HandleAutoLoot(context);   
         }
 
-        private void OnLootComplete(IReadOnlyAutoLootContext context)
+        private void OnLootComplete(IReadOnlyAutoLootContext context, Transform pickerTransform)
         {
             AutoLootContext realContext = (AutoLootContext)context;
             if(context == null){

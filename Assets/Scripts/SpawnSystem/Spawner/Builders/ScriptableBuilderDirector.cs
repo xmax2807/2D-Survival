@@ -76,6 +76,10 @@ namespace Project.SpawnSystem
                     WhileCommand.Create(()=>true, repeatCommand)
                 );
             }
+            else{
+                result.SetNextCommand(prepareCommand);
+                result.SetNextCommand(spawnCommand);
+            }
 
             return result;
         }

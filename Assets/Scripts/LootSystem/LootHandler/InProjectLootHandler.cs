@@ -9,7 +9,7 @@ namespace Project.LootSystem
 {
     public class InProjectLootHandler : ILootHandler
     {
-        public event Action<IReadOnlyAutoLootContext> OnLootComplete;
+        public event Action<IReadOnlyAutoLootContext, Transform> OnLootComplete;
 
         readonly Dictionary<int, IReadOnlyAutoLootContext> m_outcome;
         readonly ScriptableRewardableEntityRegistry m_rewardableEntityRegistry;
@@ -54,7 +54,7 @@ namespace Project.LootSystem
             }
             m_outcome.Remove(lootObjId);
 
-            OnLootComplete?.Invoke(context);
+            OnLootComplete?.Invoke(context, rewardableEntity.transform);
         }
 
         IEnumerator SimulateAutoLootObject(IVisibleLootObject2D lootObject, Transform picker, Action onDone){

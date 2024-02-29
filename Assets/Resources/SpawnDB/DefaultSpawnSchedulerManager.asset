@@ -18,10 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
   - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
   - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
-  - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
-  - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
-  - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
-  - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
-  - {fileID: 11400000, guid: b8a06ef325c34d04aac5d5aefe380cf5, type: 2}
   m_scriptableBuilderDirector: {fileID: 11400000, guid: a360930149ea9fa48a6f00b2a769d466, type: 2}
   m_storageDatabase: {fileID: 11400000, guid: 4f59d3cf20f90694e959177589c0913d, type: 2}

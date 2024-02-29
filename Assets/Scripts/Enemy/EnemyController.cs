@@ -8,8 +8,8 @@ namespace Project.Enemy
     {
         private Transform transform;
         private Transform target;
-        //private float _speed;
         RigidBodyController2D m_movementController;
+        readonly float _attackRange;
 
         private bool m_enabled;
         public bool enabled { get => m_enabled;
@@ -25,11 +25,13 @@ namespace Project.Enemy
             }
         }
 
-        public EnemyController(Transform transform, Rigidbody2D rigidbody2D, float speed){
+        public EnemyController(Transform transform, Rigidbody2D rigidbody2D, float speed, float attackRange){
             this.transform = transform;
             m_movementController = new RigidBodyController2D(rigidbody2D);
             m_movementController.ChangeSpeed(speed);
             m_enabled = true;
+
+            _attackRange = attackRange;
         }
 
         public void Update(){
@@ -38,8 +40,15 @@ namespace Project.Enemy
             if(target == null){
                 return;
             }
-            Vector3 direction = (target.position - transform.position).normalized;
-            m_movementController.ChangeDirection(direction);
+            Vector3 direction = target.position - transform.position;
+            if(direction.sqrMagnitude < _attackRange){
+                m_movementController.Disable();
+                return;
+            }
+            else{
+                m_movementController.Enable();
+            }
+            m_movementController.ChangeDirection(direction.normalized);
             m_movementController.Update();
         }
 

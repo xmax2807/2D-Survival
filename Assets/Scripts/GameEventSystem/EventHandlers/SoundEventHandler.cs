@@ -32,7 +32,7 @@ namespace Project.GameEventSystem
 
         void HandleFullSoundCallback(SoundEventData data){
             //TODO request API to get sound clip then tell AudioManager to play it
-            GameDb.SoundData soundData = GameManager.RepoProvider.GetRepository<ISoundRepository>()?.GetSound(data.SoundId);
+            GameDb.SoundData soundData = _lazySoundRepo.Value?.GetSound(data.SoundId);
             if (soundData == null) return;
             AudioManager.Instance.PlaySoundFX(soundData.Clip, data.Volume);
         }
