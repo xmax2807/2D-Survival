@@ -50,7 +50,7 @@ namespace MessagePack.Resolvers
             lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
             {
                 { typeof(global::System.Collections.Generic.List<global::Project.SaveSystem.ISaveable>), 0 },
-                { typeof(global::System.Collections.Generic.List<string>), 1 },
+                { typeof(global::System.Collections.Generic.List<global::System.Type>), 1 },
                 { typeof(global::Project.SaveSystem.ISaveable), 2 },
                 { typeof(global::Project.PlayerBehaviour.PlayerData), 3 },
                 { typeof(global::Project.SaveSystem.SerializableGameData), 4 },
@@ -70,7 +70,7 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new global::MessagePack.Formatters.ListFormatter<global::Project.SaveSystem.ISaveable>();
-                case 1: return new global::MessagePack.Formatters.ListFormatter<string>();
+                case 1: return new global::MessagePack.Formatters.ListFormatter<global::System.Type>();
                 case 2: return new MessagePack.Formatters.Project.SaveSystem.ISaveableFormatter();
                 case 3: return new MessagePack.Formatters.Project.PlayerBehaviour.PlayerDataFormatter();
                 case 4: return new MessagePack.Formatters.Project.SaveSystem.SerializableGameDataFormatter();
@@ -419,7 +419,7 @@ namespace MessagePack.Formatters.Project.SaveSystem
 
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             writer.WriteArrayHeader(2);
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>(formatterResolver).Serialize(ref writer, value.keys, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::System.Type>>(formatterResolver).Serialize(ref writer, value.keys, options);
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::Project.SaveSystem.ISaveable>>(formatterResolver).Serialize(ref writer, value.values, options);
         }
 
@@ -440,7 +440,7 @@ namespace MessagePack.Formatters.Project.SaveSystem
                 switch (i)
                 {
                     case 0:
-                        ____result.keys = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>(formatterResolver).Deserialize(ref reader, options);
+                        ____result.keys = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::System.Type>>(formatterResolver).Deserialize(ref reader, options);
                         break;
                     case 1:
                         ____result.values = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::Project.SaveSystem.ISaveable>>(formatterResolver).Deserialize(ref reader, options);
