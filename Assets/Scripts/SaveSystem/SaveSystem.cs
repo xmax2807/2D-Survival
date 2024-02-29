@@ -29,15 +29,19 @@ namespace Project.SaveSystem
             if(data == null){
                 NewGame();
             }
-            serializableSaveables.SetData(data.SaveablesDict);
+            serializableSaveables.SetDataToNonAlloc(data.SaveablesDict);
             bool result = await FileDataService.SaveAsync(CurrentFileName, serializableSaveables);
             SaveGameSavedEvent?.Invoke(result);
         }
 
         public async void Load()
         {
+            if(data == null){
+                NewGame();
+            }
             serializableSaveables = await FileDataService.LoadAsync<SerializableGameData>(CurrentFileName);
-            data = new GameData(serializableSaveables.ToDictionary());
+            serializableSaveables.SetDataToNonAlloc(data.SaveablesDict);
+            //UnityEngine.Debug.Log(data);
             SaveGameLoadedEvent?.Invoke(data);
         }
     }

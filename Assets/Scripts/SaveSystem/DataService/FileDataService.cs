@@ -31,34 +31,32 @@ namespace Project.SaveSystem
 
             Combine(ref fileName);
             string tempFile = string.Concat(fileName, TEMP_EXT);
-            string bakFile = string.Concat(fileName, BAKUP_EXT);
-            
 
-            using (var stream = new FileStream(tempFile, FileMode.Create, FileAccess.Write))
+            using FileStream stream = new(tempFile, FileMode.Create, FileAccess.Write);
+
+            try
             {
+                await serializer.SerializeAsync<TObject>(data, stream);
+                //byte[] bytes = serializer.Serialize<TObject>(data);
+                //await stream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
+                await stream.FlushAsync();
+                stream.Close();
+                // replace to original
 
-                try
+                if (!File.Exists(fileName))
                 {
-                    byte[] bytes = serializer.Serialize<TObject>(data);
-                    await stream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
-                    await stream.FlushAsync();
-                    stream.Close();
-                    // replace to original
-
-                    if (!File.Exists(fileName))
-                    {
-                        File.Create(fileName).Dispose();
-                    }
-                    File.Replace(tempFile, fileName, bakFile);
+                    File.Create(fileName).Dispose();
                 }
-                catch (OperationCanceledException e)
-                {
-                    // for now, just ignore
+                string bakFile = string.Concat(fileName, BAKUP_EXT);
+                File.Replace(tempFile, fileName, bakFile);
+            }
+            catch (OperationCanceledException e)
+            {
+                // for now, just ignore
 #if UNITY_EDITOR
-                    UnityEngine.Debug.LogError(e.Message);
+                UnityEngine.Debug.LogError(e.Message);
 #endif
-                    return false;
-                }
+                return false;
             }
             return true;
         }
@@ -74,9 +72,12 @@ namespace Project.SaveSystem
 
             try
             {
-
-                byte[] data = await File.ReadAllBytesAsync(fileName, cancellationToken);
-                return this.serializer.Deserialize<TObject>(data);
+                // byte[] data = await File.ReadAllBytesAsync(fileName, cancellationToken);
+                FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+                TObject result = await this.serializer.Deserialize<TObject>(stream);
+                await stream.DisposeAsync();
+                
+                return result;
             }
             catch (OperationCanceledException e)
             {

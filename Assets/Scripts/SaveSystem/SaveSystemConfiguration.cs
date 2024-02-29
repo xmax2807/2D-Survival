@@ -9,7 +9,7 @@ namespace Project.SaveSystem
     {
         [SerializeField] SaveDataConfig[] saveDataConfigs;
         [SerializeField] ScriptableBindRegistry bindRegistry;
-        Dictionary<string, Func<ISaveable>> saveables;
+        Dictionary<Type, Func<ISaveable>> saveables;
         private SaveSystem saveSystem;
         public IDataService DataService { get; private set; }
         public string CurrentFileName { get; private set; }
@@ -50,33 +50,33 @@ namespace Project.SaveSystem
         /// <typeparam name="TSaveable"></typeparam>
         public void RegisterSaveableData<TSaveable>(Func<ISaveable> creator) where TSaveable : ISaveable
         {
-            RegisterSaveableData(typeof(TSaveable).Name, creator);
+            RegisterSaveableData(typeof(TSaveable), creator);
         }
 
-        public void RegisterSaveableData(string name, Func<ISaveable> creator)
+        public void RegisterSaveableData(Type type, Func<ISaveable> creator)
         {
             if (creator == null)
             {
                 throw new ArgumentNullException(nameof(creator));
             }
 
-            saveables ??= new Dictionary<string, Func<ISaveable>>();
+            saveables ??= new Dictionary<Type, Func<ISaveable>>();
 
-            if (!saveables.ContainsKey(name))
+            if (!saveables.ContainsKey(type))
             {
-                saveables.Add(name, creator);
+                saveables.Add(type, creator);
             }
             else
             {
 #if UNITY_EDITOR
-                Debug.LogWarning($"Data {name} already registered");
+                Debug.LogWarning($"Data {type} already registered");
 #endif
             }
         }
 
         public GameData RequestNewData()
         {
-            Dictionary<string, ISaveable> saveables = new();
+            Dictionary<Type, ISaveable> saveables = new();
             foreach (var saveable in this.saveables)
             {
                 saveables.Add(saveable.Key, saveable.Value.Invoke());

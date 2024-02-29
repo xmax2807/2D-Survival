@@ -1,5 +1,6 @@
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using MessagePack;
 using MessagePack.Resolvers;
 
@@ -26,6 +27,15 @@ namespace Project.SaveSystem
         public byte[] Serialize<TObject>(TObject obj)
         {
             return MessagePackSerializer.Serialize(obj);
+        }
+
+        public async Task SerializeAsync<TObject>(TObject obj, Stream stream){
+            await MessagePackSerializer.SerializeAsync(stream,obj);
+        }
+
+        public async Task<TObject> Deserialize<TObject>(Stream stream)
+        {
+            return await MessagePackSerializer.DeserializeAsync<TObject>(stream);
         }
 
         public static void Initialize()
