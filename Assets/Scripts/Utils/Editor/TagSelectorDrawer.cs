@@ -1,8 +1,8 @@
+using UnityEditor;
+using UnityEngine;
 namespace Project.Utils
 {
-    using UnityEditor;
-    using UnityEngine;
-
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(TagSelectorAttribute))]
     public class TagSelectorPropertyDrawer : PropertyDrawer
     {
@@ -18,5 +18,5 @@ namespace Project.Utils
             }
         }
     }
-
+    #endif
 }

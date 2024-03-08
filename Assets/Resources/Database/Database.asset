@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   m_soundTable: {fileID: 11400000, guid: 305aa21864fd50449a993a6dfa703b28, type: 2}
-  m_vfxTable: {fileID: 0}
+  m_particleEffectTable: {fileID: 11400000, guid: 209283a41975a9342bd05b6783d128dc, type: 2}
+  m_animatorEffectTable: {fileID: 11400000, guid: 921577a851f39b94881630805b311a9d, type: 2}

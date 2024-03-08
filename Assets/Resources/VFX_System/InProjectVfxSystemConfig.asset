@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052d051c570b30842b9495a554eddde5, type: 3}
+  m_Name: InProjectVfxSystemConfig
+  m_EditorClassIdentifier: 
+  m_animatorEffectControllerTemplate: {fileID: 2711362771259415013, guid: f822115078102024d863161314ce3fc2, type: 3}
+  m_scriptableDatabaseRepoProvider: {fileID: 11400000, guid: 3022443c2a54a894d99669b33d5b20f7, type: 2}

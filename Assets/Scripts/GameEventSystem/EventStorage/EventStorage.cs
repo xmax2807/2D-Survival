@@ -15,6 +15,7 @@ namespace Project.GameEventSystem
             [SerializeField] public int id_SplashScreenCompleted;
             [SerializeField] public int id_PlayerChanged;
             [SerializeField] public int id_SoundRequestEvent;
+            [SerializeField] public int id_VisualEffectRequestEvent;
             [SerializeField] public int id_MaterialDetectionRequestEvent;
             [SerializeField] public int id_InventoryItemAddedEvent;
             [SerializeField] public int id_InventoryItemRemovedEvent;
@@ -31,6 +32,7 @@ namespace Project.GameEventSystem
         private readonly ActionEventController GameEndEvent = new();
         private readonly PlayerEventChangeSubscription PlayerChanged = new();
         private readonly SoundEventSubscription SoundRequestEvent = new();
+        private readonly ActionEventControllerT<VisualEffectEventData> VisualEffectRequestEvent = new();
         private readonly ActionEventControllerT<MaterialDetectionEventData> MaterialDetectionRequestEvent = new();
         private readonly ActionEventControllerT<InventoryItemEventData> InventoryItemAddedEvent = new();
         private readonly ActionEventControllerT<InventoryItemEventData> InventoryItemRemovedEvent = new();
@@ -53,6 +55,7 @@ namespace Project.GameEventSystem
                 {m_eventIds.id_SplashScreenCompleted, SplashScreenCompleted },
                 {m_eventIds.id_PlayerChanged, PlayerChanged },
                 {m_eventIds.id_SoundRequestEvent, SoundRequestEvent},
+                {m_eventIds.id_VisualEffectRequestEvent, VisualEffectRequestEvent},
                 {m_eventIds.id_MaterialDetectionRequestEvent, MaterialDetectionRequestEvent},
                 {m_eventIds.id_InventoryItemAddedEvent, InventoryItemAddedEvent},
                 {m_eventIds.id_InventoryItemRemovedEvent, InventoryItemRemovedEvent},
@@ -93,12 +96,13 @@ namespace Project.GameEventSystem
                     $"SplashScreenCompleted: {m_ids[2]}",
                     $"PlayerChanged: {m_ids[3]}",
                     $"SoundRequested: {m_ids[4]}",
-                    $"MaterialDetectionRequested: {m_ids[5]}",
-                    $"InventoryItemAdded: {m_ids[6]}",
-                    $"InventoryItemRemoved: {m_ids[7]}",
-                    $"DropGoldEvent: {m_ids[8]}",
-                    $"DropEXPEvent: {m_ids[9]}",
-                    $"DropItemEvent: {m_ids[10]}"
+                    $"VisualEffectRequested: {m_ids[5]}",
+                    $"MaterialDetectionRequested: {m_ids[6]}",
+                    $"InventoryItemAdded: {m_ids[7]}",
+                    $"InventoryItemRemoved: {m_ids[8]}",
+                    $"DropGoldEvent: {m_ids[9]}",
+                    $"DropEXPEvent: {m_ids[10]}",
+                    $"DropItemEvent: {m_ids[11]}",
                 };
         }
         private static int[] m_ids;
@@ -110,6 +114,7 @@ namespace Project.GameEventSystem
                 m_eventIds.id_SplashScreenCompleted,
                 m_eventIds.id_PlayerChanged,
                 m_eventIds.id_SoundRequestEvent,
+                m_eventIds.id_VisualEffectRequestEvent,
                 m_eventIds.id_MaterialDetectionRequestEvent,
                 m_eventIds.id_InventoryItemAddedEvent,
                 m_eventIds.id_InventoryItemRemovedEvent,

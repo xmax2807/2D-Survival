@@ -24,6 +24,7 @@ namespace Project.Manager
         public IEventController PlayerChanged => m_eventStorage[m_eventIds.id_PlayerChanged];
 
         public IEventController PlaySoundEvent => m_eventStorage[m_eventIds.id_PlaySoundEvent];
+        public IEventController PlayVFXEvent => m_eventStorage[m_eventIds.id_PlayVisualEffectEvent];
         public IEventController MaterialDetectionEvent => m_eventStorage[m_eventIds.id_MaterialDetectionEvent];
 
         public IEventController InventoryItemAddedEvent => m_eventStorage[m_eventIds.id_InventoryItemAdded];

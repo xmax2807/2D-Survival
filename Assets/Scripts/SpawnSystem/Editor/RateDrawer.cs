@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Project.SpawnSystem
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(Rate))]
     public class RateDrawer : PropertyDrawer
     {
@@ -11,4 +12,5 @@ namespace Project.SpawnSystem
             EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label);
         }
     }
+    #endif
 }

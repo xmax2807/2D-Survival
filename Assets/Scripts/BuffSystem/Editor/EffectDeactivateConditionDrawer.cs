@@ -1,9 +1,9 @@
-using Codice.Client.BaseCommands.BranchExplorer;
 using UnityEditor;
 using UnityEngine;
 
 namespace Project.BuffSystem
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(EffectData.DeactivateCondition))]
     public class EffectDeactivateConditionEditor : PropertyDrawer{
         private bool m_foldout = false;
@@ -42,4 +42,5 @@ namespace Project.BuffSystem
             EditorGUI.indentLevel = 0;
         }
     }
+    #endif
 }

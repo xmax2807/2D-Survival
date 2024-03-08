@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EventFeedbackBuilder
   m_EditorClassIdentifier: 
   id_eventPlaySound: 4
-  id_eventPlayVFX: 0
+  id_eventPlayVFX: 5
   id_eventPopDetailUI: 0
   m_eventProvider: {fileID: 11400000, guid: b733518f9a799044283e6a69903b317c, type: 2}

@@ -1,0 +1,1 @@
+{"assemblyName":"com.bustedbunny.mvvmtoolkit","fullTypeNames":["MVVMToolkit.Binding.Generics.UintSolver","MVVMToolkit.Binding.Generics.IntSolver","MVVMToolkit.Binding.Generics.ByteSolver","MVVMToolkit.Binding.Generics.DoubleSolver","MVVMToolkit.Binding.Generics.StringSolver","MVVMToolkit.Binding.Generics.FloatSolver","MVVMToolkit.Binding.Generics.BoolSolver"]}

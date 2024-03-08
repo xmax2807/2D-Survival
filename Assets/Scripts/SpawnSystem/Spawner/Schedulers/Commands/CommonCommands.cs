@@ -22,7 +22,7 @@ namespace Project.SpawnSystem
     public class WaitCommand : ISpawnSchedulerCommand
     {
         private readonly ISpawnSchedulerCommand nextCommand;
-        private YieldInstruction waitInstruction;
+        private readonly YieldInstruction waitInstruction;
         public WaitCommand(float time, ISpawnSchedulerCommand nextCommand) {
             waitInstruction = new WaitForSeconds(time);
             this.nextCommand = nextCommand;

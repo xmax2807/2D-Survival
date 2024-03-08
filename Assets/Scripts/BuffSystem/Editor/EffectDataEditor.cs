@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 namespace Project.BuffSystem
 {
+    #if UNITY_EDITOR
     [CustomEditor(typeof(EffectData))]
     public class EffectDataEditor : Editor
     {
@@ -123,4 +124,5 @@ namespace Project.BuffSystem
             AssetDatabase.SaveAssets();
         }
     }
+    #endif
 }

@@ -1,7 +1,11 @@
+using UnityEngine;
+
 namespace Project.SpawnSystem
 {
     public interface IRewardableEntity
     {
+        GameObject gameObject { get; }
+        Transform transform { get; }
         int Id { get; }
         void GiveGold(int amount);
         void GiveExp(int amount);

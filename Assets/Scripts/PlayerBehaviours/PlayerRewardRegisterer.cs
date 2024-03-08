@@ -7,11 +7,21 @@ namespace Project.PlayerBehaviour
     public class PlayerRewardRegisterer : MonoCoreComponent, IRewardableEntity
     {
         [SerializeField] private ScriptableRewardableEntityRegistry _registry;
-
+        private PlayerDataController _playerData;
+        PlayerDataController playerDataController{
+            get{
+                if(_playerData == null) {
+                    _playerData = Core.GetCoreComponent<PlayerDataController>();
+                }
+                return _playerData;
+            }
+        }
         public int Id => Core.GetId();
 
-        protected override void AfterAwake(){
+        protected override void AfterAwake()
+        {
             _registry.Register(Id, this);
+            AddCoreComponent<PlayerRewardRegisterer>(this);
         }
         public float GetDropBonus()
         {
@@ -39,6 +49,13 @@ namespace Project.PlayerBehaviour
 
         public void GiveGold(int amount)
         {
+            if(playerDataController == null) {
+                #if UNITY_EDITOR
+                Debug.LogError("PlayerDataController is not created");
+                #endif
+                return;
+            }
+            playerDataController.ReceiveGold(amount);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 namespace Project.SpawnSystem
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SpawnScheduleData))]
     public class SpawnScheduleDataDrawer : PropertyDrawer{
         private SerializedProperty m_spawnTrigger;
@@ -45,4 +46,5 @@ namespace Project.SpawnSystem
             EditorGUILayout.PropertyField(spawnTime);
         }
     }
+    #endif
 }

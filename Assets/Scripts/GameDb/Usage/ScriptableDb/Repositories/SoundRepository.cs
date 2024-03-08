@@ -5,7 +5,7 @@ namespace Project.GameDb.ScriptableDatabase{
     public interface ISoundRepository{
         SoundData GetSound(int id);
     }
-    internal class SoundRepository : BaseRepository<SoundData>, ISoundRepository
+    internal class SoundRepository : BaseRepository, ISoundRepository
     {
         public SoundRepository(ScriptableDatabase database) : base(database)
         {

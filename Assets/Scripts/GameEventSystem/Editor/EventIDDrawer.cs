@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace UnityEditor
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(EventIDAttribute))]
     public class EventIDDrawer : PropertyDrawer{
         private int chosenIndex;
@@ -19,4 +20,5 @@ namespace UnityEditor
             }
         }
     }
+    #endif
 }

@@ -7,6 +7,7 @@ namespace Project.GameEventSystem
         IEventController SplashScreenCompleted {get;}
 
         IEventController PlaySoundEvent {get;}
+        IEventController PlayVFXEvent {get;}
 
         //Physic events
         IEventController MaterialDetectionEvent {get;}

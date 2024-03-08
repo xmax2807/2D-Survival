@@ -7,6 +7,7 @@ using Project.CharacterBehaviour;
 
 namespace Project.PlayerBehaviour{
     public class PlayerCore : Core, ITarget{
+        [SerializeField] PlayerDataController m_playerData;
         private PlayerModifier m_playerStatModifier;
         private PlayerStats m_playerStats;
 
@@ -17,6 +18,7 @@ namespace Project.PlayerBehaviour{
         public IEffectHandler EffectHandler => throw new NotImplementedException();
 
         private void Awake(){
+            AddCoreComponent(m_playerData);
             m_playerStats = new PlayerStats();
             m_playerStatModifier = new PlayerModifier(m_playerStats, new PlayerBuffs());
         }

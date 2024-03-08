@@ -2,6 +2,7 @@ using Project.AnimationEventSystem;
 using UnityEngine;
 namespace UnityEditor
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(AnimationEventIDAttribute))]
     public class AnimationEventIDDrawer : PropertyDrawer
     {
@@ -21,4 +22,5 @@ namespace UnityEditor
             }
         }
     }
+    #endif
 }

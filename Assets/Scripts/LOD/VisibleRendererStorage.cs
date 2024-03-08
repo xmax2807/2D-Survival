@@ -8,7 +8,7 @@ namespace Project.LOD
 {
     [CreateAssetMenu(fileName = "VisibleRendererStorage", menuName = "LOD/VisibleRendererStorage")]
     public class VisibleRendererStorage : ScriptableObject, IRendererRegisterer, ICentralizedRenderer{
-        Dictionary<int, Renderer> m_renderers = new Dictionary<int, Renderer>();
+        readonly Dictionary<int, Renderer> m_renderers = new();
 
         public event Action<int> OnRendererCountChanged;
         private Queue<IEnumerator> m_commandQueue;

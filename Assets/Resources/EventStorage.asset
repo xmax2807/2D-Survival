@@ -18,9 +18,10 @@ MonoBehaviour:
     id_SplashScreenCompleted: 2
     id_PlayerChanged: 3
     id_SoundRequestEvent: 4
-    id_MaterialDetectionRequestEvent: 5
-    id_InventoryItemAddedEvent: 6
-    id_InventoryItemRemovedEvent: 7
-    id_DropGoldEvent: 8
-    id_DropEXPEvent: 9
-    id_DropItemEvent: 10
+    id_VisualEffectRequestEvent: 5
+    id_MaterialDetectionRequestEvent: 6
+    id_InventoryItemAddedEvent: 7
+    id_InventoryItemRemovedEvent: 8
+    id_DropGoldEvent: 9
+    id_DropEXPEvent: 10
+    id_DropItemEvent: 11

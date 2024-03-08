@@ -8,6 +8,7 @@ using Project.GameEventSystem;
 using Project.InputHandler;
 using Project.LOD;
 using Project.LootSystem;
+using Project.VisualEffectSystem;
 using UnityEngine;
 
 namespace Project.Manager
@@ -17,7 +18,7 @@ namespace Project.Manager
         #region Effect Config
         private ScriptableEffectConfiguration m_effectSystemConfiguration;
         public IEffectEventPublisher EffectEventPublisher => m_effectSystemConfiguration;
-        public TargetEffectEventManager TargetEffectEventManager {get;private set;}
+        public TargetEffectEventManager TargetEffectEventManager { get; private set; }
         #endregion
 
         #region Game Event Config
@@ -40,7 +41,7 @@ namespace Project.Manager
         #endregion
 
         #region Utils
-        public Queue<IEnumerator> CoroutineCommandQueue {get;private set;}
+        public Queue<IEnumerator> CoroutineCommandQueue { get; private set; }
         #endregion
 
         #region Parameters
@@ -58,11 +59,17 @@ namespace Project.Manager
         public static ILootSystemAPI LootSystem => _instance.m_lootSystemConfiguration.LootSystem;
         #endregion
 
+        #region VFX System
+        [SerializeField] VisualEffectSystemConfig m_vfxSystemConfiguration;
+        public static VisualEffectManager VFXManager { get; private set; }
+        #endregion
+
         [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
-        void OnEnable(){
-            
+        void OnEnable()
+        {
+
             // Init Coroutines
             Utils.Coroutines.Initialize(this);
             CoroutineCommandQueue = new Queue<IEnumerator>();
@@ -72,12 +79,12 @@ namespace Project.Manager
             _gameEventProvider = Resources.Load<GameEventSystem.ScriptableEventProvider>("EventSystem_EventProvider");
             _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
             DefineEventHandlers();
-            
-            InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider");
+
+            CoroutineCommandQueue.Enqueue(InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider"));
             InitializeLootSystem(filePath: "LootSystemConfiguration");
 
             GetParams();
-            
+
             m_effectSystemConfiguration = Resources.Load<ScriptableEffectConfiguration>("EffectConfiguration");
 
 
@@ -91,27 +98,35 @@ namespace Project.Manager
             m_lootSystemConfiguration.Initialize(this.transform);
         }
 
-        private void InitializeDatabase(string filePath)
+        private IEnumerator InitializeDatabase(string filePath)
         {
-            m_scriptableDatabase = Resources.Load<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
-            CoroutineCommandQueue.Enqueue(m_scriptableDatabase.Initialize());
+            var request = Resources.LoadAsync<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
+            yield return request;
+            m_scriptableDatabase = request.asset as GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider;
+            yield return m_scriptableDatabase.Initialize();
+            VFXManager = new VisualEffectManager(m_vfxSystemConfiguration);
         }
 
         private IEnumerator RunQueueCommands()
         {
-            while(true){
-                if(CoroutineCommandQueue.Count > 0){
+            while (true)
+            {
+                if (CoroutineCommandQueue.Count > 0)
+                {
                     yield return CoroutineCommandQueue.Dequeue();
                 }
-                else{
+                else
+                {
                     yield return null;
                 }
             }
         }
 
-        void DefineEventHandlers(){
+        void DefineEventHandlers()
+        {
             _gameEventService = new GameEventService();
             _gameEventService.AddHandler(new SoundEventHandler(_gameEventAPI));
+            _gameEventService.AddHandler(new VisualEffectEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new PhysicEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new ItemEventHandler(_gameEventAPI));
             _gameEventService.AddHandler(new ItemDropEventHandler(_gameEventAPI));
