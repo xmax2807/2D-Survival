@@ -1,5 +1,7 @@
 using System;
+using Project.GameDb;
 using Project.GameDb.ScriptableDatabase;
+using Project.Manager;
 
 namespace Project.GameEventSystem
 {
@@ -9,6 +11,7 @@ namespace Project.GameEventSystem
         readonly Lazy<IVFXRepository> _lazyVFXRepo;
         public VisualEffectEventHandler(IEventAPI eventAPI) : base(eventAPI)
         {
+            _lazyVFXRepo = new Lazy<IVFXRepository>(() => GameManager.RepoProvider.GetRepository<IVFXRepository>());
             VisualEffectCallback = OnVisualEffectCallback;
         }
 
@@ -22,11 +25,17 @@ namespace Project.GameEventSystem
             m_eventAPI.PlayVFXEvent.Unsubscribe(VisualEffectCallback);
         }
 
-        void OnVisualEffectCallback(VisualEffectEventData data){
-            //TODO implement VIsual effect manager
-            UnityEngine.Debug.Log("VFX: " + data.EffectId);
+        void OnVisualEffectCallback(VisualEffectEventData data)
+        {
+            if (data.FXType == VisualEffectEventData.EffectType.Animator)
+            {
+                AnimatorEffectData effect = _lazyVFXRepo.Value?.GetAnimatorEffect(data.EffectId);
 
-            _lazyVFXRepo.Value?.GetVFX(data.EffectId);
+                if (effect != null)
+                {
+                    GameManager.VFXManager.AnimatorEffectService.PlayEffectAt(effect.stateId, data.Position);
+                }
+            }
         }
     }
 }

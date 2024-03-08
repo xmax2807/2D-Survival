@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 namespace Project.SpawnSystem
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SpawnData))]
     public class SpawnDataDrawer : PropertyDrawer
     {
@@ -51,4 +52,5 @@ namespace Project.SpawnSystem
             EditorGUILayout.PropertyField(m_waveData);
         }
     }
+    #endif
 }

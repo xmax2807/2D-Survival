@@ -1,0 +1,35 @@
+.popup--hidden {
+    flex-basis: auto;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 0;
+    padding-bottom: 5px;
+    padding-left: 3px;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+    right: 0;
+    opacity: 0;
+    transition-property: opacity;
+}
+
+.popup--visible {
+    flex-direction: row;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    right: auto;
+    translate: 0 0;
+    transition-property: opacity;
+    transition-duration: 1s;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}

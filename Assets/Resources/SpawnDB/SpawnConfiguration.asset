@@ -38,7 +38,7 @@ MonoBehaviour:
         value: 10
       _dropItems: []
       _expAmount: 10
-      _goldAmount: 500
+      _goldAmount: 1000
     _waveData:
       _entityID: 0
       _count: 0
@@ -50,5 +50,5 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _contextData:
-      SpawnCount: 100
+      SpawnCount: 10
       SpawnPosition: 0

@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Threading.Tasks;
-
 namespace Project.GameDb.ScriptableDatabase
 {
     public interface IVFXRepository{
-        VFXData GetVFX(int id);
+        ParticleEffectData GetParticleEffect(int id);
+        AnimatorEffectData GetAnimatorEffect(int id);
     }
-    public class VFXRepository : BaseRepository<VFXData>, IVFXRepository
+    public class VFXRepository : BaseRepository, IVFXRepository
     {
         public VFXRepository(ScriptableDatabase database) : base(database)
         {
         }
 
-        public VFXData GetVFX(int id) => m_database.GetVFX(id);
+        public AnimatorEffectData GetAnimatorEffect(int id) => m_database.GetAnimatorEffect(id);
+        public ParticleEffectData GetParticleEffect(int id) => m_database.GetParticleEffect(id);
     }
 }

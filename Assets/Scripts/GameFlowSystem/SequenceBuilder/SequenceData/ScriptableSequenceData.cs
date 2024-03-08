@@ -4,7 +4,7 @@ namespace Project.GameFlowSystem
     /// <summary>
     /// contains all the data needed to build a sequence
     /// </summary>
-    
+    [CreateAssetMenu(fileName = "SequenceData", menuName = "FlowSystem/SequenceData", order = 1)]
     public class ScriptableSequenceData : ScriptableObject
     {
         public int Id => _sequenceData == null? -1 : _sequenceData.GetHashCode();

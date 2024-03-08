@@ -1,8 +1,14 @@
 using UnityEngine;
 namespace Project.GameDb{
     [System.Serializable]
-    public class VFXData{
+    public class ParticleEffectData{
         public int id;
-        public GameObject vfx;
+        public ParticleSystem vfx;
+    }
+
+    [System.Serializable]
+    public class AnimatorEffectData{
+        public int id;
+        public int stateId;
     }
 }

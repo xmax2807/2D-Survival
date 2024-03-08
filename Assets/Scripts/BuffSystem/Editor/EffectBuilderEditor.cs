@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 namespace Project.BuffSystem
 {
+    #if UNITY_EDITOR
     [CustomEditor(typeof(EffectBuilder))]
     public class EffectBuilderEditor : Editor
     {
@@ -52,4 +53,5 @@ namespace Project.BuffSystem
             serializedObject.ApplyModifiedProperties();
         }
     }
+    #endif
 }

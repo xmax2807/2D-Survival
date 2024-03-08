@@ -63,7 +63,7 @@ namespace Project.LootSystem
             }
             m_LootTableSource.ReturnAutoLootableItem(realContext.ItemType, realContext.GetItem<AutoLootableItem>());
             FeedbackData[] data = m_LootTableSource.GetAutoLootableItemFeedbacks(realContext.ItemType);
-            m_LootFeedbackHandler.PlayFeedback(data);
+            m_LootFeedbackHandler.PlayFeedback(data, pickerTransform);
             m_LootOutcomeContextPool.Return(realContext);
         }
 

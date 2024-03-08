@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Project.LootSystem
 {
-
     /// <summary>
     /// primarily play feedback upon collected it
     /// </summary>

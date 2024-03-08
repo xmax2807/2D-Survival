@@ -33,9 +33,11 @@ namespace Project.LootSystem
             throw new NotImplementedException();
         }
 
-        private void HandleInvokePlayVFX(FeedbackData feedbackData, Transform pickerTransform)
+        private void HandleInvokePlayVFX(FeedbackData feedbackData, Transform target)
         {
-            VisualEffectEventData data = new(feedbackData.vfxId, pickerTransform);
+            if(target == null) return;
+            
+            VisualEffectEventData data = new(feedbackData.vfxId, VisualEffectEventData.EffectType.Animator, target.position);
             m_eventProvider.Invoke(id_eventPlayVFX, data);
         }
 

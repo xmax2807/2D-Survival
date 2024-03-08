@@ -8,6 +8,7 @@ using Project.GameEventSystem;
 using Project.InputHandler;
 using Project.LOD;
 using Project.LootSystem;
+using Project.VisualEffectSystem;
 using UnityEngine;
 
 namespace Project.Manager
@@ -58,6 +59,11 @@ namespace Project.Manager
         public static ILootSystemAPI LootSystem => _instance.m_lootSystemConfiguration.LootSystem;
         #endregion
 
+        #region VFX System
+        [SerializeField] VisualEffectSystemConfig m_vfxSystemConfiguration;
+        public static VisualEffectManager VFXManager { get; private set; }
+        #endregion
+
         [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
@@ -74,7 +80,7 @@ namespace Project.Manager
             _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
             DefineEventHandlers();
 
-            InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider");
+            CoroutineCommandQueue.Enqueue(InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider"));
             InitializeLootSystem(filePath: "LootSystemConfiguration");
 
             GetParams();
@@ -92,10 +98,13 @@ namespace Project.Manager
             m_lootSystemConfiguration.Initialize(this.transform);
         }
 
-        private void InitializeDatabase(string filePath)
+        private IEnumerator InitializeDatabase(string filePath)
         {
-            m_scriptableDatabase = Resources.Load<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
-            CoroutineCommandQueue.Enqueue(m_scriptableDatabase.Initialize());
+            var request = Resources.LoadAsync<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
+            yield return request;
+            m_scriptableDatabase = request.asset as GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider;
+            yield return m_scriptableDatabase.Initialize();
+            VFXManager = new VisualEffectManager(m_vfxSystemConfiguration);
         }
 
         private IEnumerator RunQueueCommands()

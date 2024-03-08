@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label tabindex="-1" text="$Health={Health}" />
+    <ui:GroupBox style="width: 100px; height: 100%; flex-shrink: 1; right: auto; flex-direction: column; align-self: flex-end;">
+        <ui:VisualElement name="coinPopup" style="flex-grow: 1;" />
+    </ui:GroupBox>
+</ui:UXML>

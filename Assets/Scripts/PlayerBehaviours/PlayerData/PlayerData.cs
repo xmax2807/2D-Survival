@@ -47,14 +47,20 @@ namespace Project.PlayerBehaviour
             CriticalRate = criticalRate;
         }
 
-        public ISaveable CreateNew()
-        {
-            return new PlayerData();
-        }
-
         public override string ToString()
         {
             return $"Health: {Health}, MoveSpeed: {MoveSpeed}, Attack: {Attack}, Defense: {Defense}, CriticalRate: {CriticalRate}";
         }
     }
+
+    [System.Serializable, MessagePackObject(true)]
+    public class PlayerInventoryData : ISaveable{
+        public int Gold { get; set; }
+
+        public SerializableGuid Id {get; private set;}
+
+        public PlayerInventoryData(){
+            Id = SerializableGuid.NewGuid();
+        }
+    }   
 }

@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 namespace Project.SpawnSystem
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SpawnCondition))]
     public class SpawnConditionDrawer : PropertyDrawer{
 
@@ -25,4 +26,5 @@ namespace Project.SpawnSystem
             }
         }
     }
+    #endif
 }

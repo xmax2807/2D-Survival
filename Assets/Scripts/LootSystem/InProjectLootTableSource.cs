@@ -25,7 +25,6 @@ namespace Project.LootSystem
         protected override AutoLootableItem GetGoldObject(int amount)
         {
             Gold gold = goldPool.Get();
-
             float value;
             if (amount >= 1000)
             {

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 9b2b932d8c9f9dd40931dc7bd6ad2077
+  m_SerializeEntries:
+  - m_GUID: 77c34669b98a6f94492212b129d072b6
+    m_Address: Assets/Samples/Model-View-ViewModel Toolkit/1.0.0-pre.16/Sample View/LocalizationAssets/Flags/en.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8aa0d84154f29f24ea44c1adee152ad5
+    m_Address: Assets/Samples/Model-View-ViewModel Toolkit/1.0.0-pre.16/Sample View/LocalizationAssets/Flags/ru.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8ab039557a68f7b4988349af47a8b2c1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1ecef011063e519449225e871a3b67cf, type: 2}
+    - {fileID: 11400000, guid: f1a1b03f348fd1b498ce8bb75534f5df, type: 2}
