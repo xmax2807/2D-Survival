@@ -3,7 +3,7 @@
  Goals: Survival mode, Adventure mode, Gacha
 
 # Self-learning:
- Data-driven approach for various spawning (enemy type, spawn type, reward rate)
- Data-driven approach for flexible effect buff/debuff system
- Spatial Partition for game world optimization: Cell
+ 1. Data-driven approach for various spawning (enemy type, spawn type, reward rate)
+ 2. Data-driven approach for flexible effect buff/debuff system
+ 3. Spatial Partition for game world optimization: Cell
  
