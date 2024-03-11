@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Project.GameFlowSystem
     [CreateAssetMenu(fileName = "SequenceConfiguration", menuName = "FlowSystem/SequenceConfiguration", order = 1)]
     public class SequenceConfiguration : ScriptableObject
     {
-        [SerializeField] private ScriptableGameStateFactory factory;
+        [SerializeField] private AbstractGameStateFactory factory;
         [SerializeField] private AbstractSequenceBuildDirector director;
         
         //TODO, when Addressable imported, try to convert head sequence as Addressable for future expansion 
@@ -23,5 +24,31 @@ namespace Project.GameFlowSystem
             director.BuildSequences(ref gameStates, factory, headSequenceData);
             InitialState = director.DefaultState;
         }
+
+        #if UNITY_EDITOR
+        public static string[] AvailableBuilders {get; private set;}
+        void OnValidate(){
+            if(factory != null){
+                factory.NamesChangedEvent += OnFactoryNamesChanged;
+                AvailableBuilders = factory.Names;
+            }
+        }
+
+        void OnDisable(){
+            if(factory != null){
+                factory.NamesChangedEvent -= OnFactoryNamesChanged;
+            }
+        }
+
+        void OnFactoryNamesChanged(string[] newNames){
+            AvailableBuilders = newNames;
+        }
+
+        internal static int FindIndex(string value)
+        {
+            if(AvailableBuilders == null) return -1;
+            return Array.IndexOf(AvailableBuilders, value);
+        }
+#endif
     }
 }

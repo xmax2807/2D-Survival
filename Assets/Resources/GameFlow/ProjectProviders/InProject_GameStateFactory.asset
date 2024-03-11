@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cda84e4ae8db5c47b28a8402b9eb7fa, type: 3}
-  m_Name: CustomSequenceDirector
+  m_Script: {fileID: 11500000, guid: e4310634063e6a94a82550aded1860aa, type: 3}
+  m_Name: InProject_GameStateFactory
   m_EditorClassIdentifier: 
-  CommandProvider: {fileID: 11400000, guid: 97f95c42948bca04f908d6be84cae1d3, type: 2}
-  EventProvider: {fileID: 11400000, guid: 4ef8e9209b911694cb5c6d1dd84de2bb, type: 2}

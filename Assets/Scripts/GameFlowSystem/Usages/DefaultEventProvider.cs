@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Project.GameEventSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Project.GameFlowSystem
+namespace Project.GameFlowSystem.InProject
 {
-    [CreateAssetMenu(fileName = "EventProvider", menuName = "GameFlowSystem/EventProvider")]
+    [CreateAssetMenu(fileName = "EventProvider", menuName = "GameFlowSystem/InProject/EventProvider")]
     public class DefaultEventProvider : EventProvider
     {
         [Serializable]
@@ -16,9 +15,8 @@ namespace Project.GameFlowSystem
         }
 
         [SerializeField] SystemEventMapId[] m_systemEventMap;
-        Dictionary<GameSystemEventType, int> m_systemEventMapId = new Dictionary<GameSystemEventType, int>();
-
-        [SerializeField] Project.GameEventSystem.ScriptableEventProvider m_projectEventProvider;
+        [SerializeField] ScriptableEventProvider m_projectEventProvider;
+        readonly Dictionary<GameSystemEventType, int> m_systemEventMapId = new();
 
 
         void OnEnable(){

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd1b2179376c544e81d456450b76c3e, type: 3}
   m_Name: SequenceData
   m_EditorClassIdentifier: 
-  _builderId: 
+  _builderId: LaunchState
   _sequenceData:
-    commandType: 0
+    commandTypes: 0000000001000000
   _links:
   - linkData:
-      linkType: 1
+      linkType: 0
       eventType: 0
-    linkSequence: {fileID: 0}
+    linkSequence: {fileID: 11400000, guid: 45483f637e126d2429d89fd3743bd507, type: 2}

@@ -8,6 +8,5 @@ namespace Project.GameFlowSystem
         [UnityEngine.SerializeField] private string identificationName;
         public string IdentificationName => identificationName;
         public abstract IGameState BuildState(SequenceData data, CommandProvider commandProvider);
-        public abstract IGameLink BuildLink(SequenceLinkData link, IGameState nextState, EventProvider eventProvider);
     }
 }

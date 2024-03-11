@@ -8,7 +8,7 @@ namespace Project.GameFlowSystem
     public class ScriptableSequenceData : ScriptableObject
     {
         public int Id => _sequenceData == null? -1 : _sequenceData.GetHashCode();
-        [SerializeField] private string _builderId;
+        [SerializeField, BuilderID] private string _builderId;
         public string BuilderId => _builderId;
         [SerializeField] private SequenceData _sequenceData;
         public SequenceData SequenceData => _sequenceData;

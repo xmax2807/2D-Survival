@@ -7,7 +7,6 @@ namespace Project.GameFlowSystem
     }
 
     public interface IGameStateFactory{
-        IGameState CreateGameState(string builderId, SequenceData data);
-        IGameLink CreateLink(string builderId, SequenceLinkData link, IGameState nextState);
+        IGameStateBuilder Resolve(string builderId);
     }
 }
