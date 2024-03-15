@@ -8,7 +8,7 @@ namespace Project.PlayerBehaviour
     public class PlayerManager : ScriptableObject, IBindRegister
     {
         [SerializeField] private PlayerCore playerTemplate;
-        private PlayerDataBinding playerDataBinding = new PlayerDataBinding();
+        private readonly PlayerDataBinding playerDataBinding = new();
 
         void OnEnable(){
             ScriptableBindRegistry.OnBindRegistryCreated += OnBindRegistryCreated;

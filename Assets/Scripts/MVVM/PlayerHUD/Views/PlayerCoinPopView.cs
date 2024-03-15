@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using CommunityToolkit.Mvvm.Messaging;
 using MVVMToolkit;
+using MVVMToolkit.Binding;
 using Project.UIToolKit.Asset;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -27,32 +29,41 @@ namespace Project.MVVM.PlayerHUD
         Coroutine delayVisible;
         int delta;
 
-        protected override VisualElement Instantiate(){
-            var root = base.Instantiate();
-            mainCoinContainer = root.Q<Label>(mainCoinContainerName);
-            additionalCoinContainer = root.Q<Label>(additionalCoinContainerName);
-            var icon = root.Q<VisualElement>(iconName);
+        protected override void OnInit()
+        {
+            base.OnInit();
+            mainCoinContainer = RootVisualElement.Q<Label>(mainCoinContainerName);
+            additionalCoinContainer = RootVisualElement.Q<Label>(additionalCoinContainerName);
+            var icon = RootVisualElement.Q<VisualElement>(iconName);
 
             mainCoinContainer.parent.style.backgroundImage = new StyleBackground(popupAsset.Background);
             icon.style.backgroundImage = new StyleBackground(popupAsset.Icon);
-            return root;
         }
+
         public void Receive(CoinReceiveData message)
         {
-            if(currentCoroutine == null){
+            if (message == null)
+            {
+                return;
+            }
+
+            if (currentCoroutine == null)
+            {
                 currentCoroutine = StartCoroutine(SimulateCoinReceive(message));
             }
 
             delta += message.newCoinValue - message.oldCoinValue;
-            additionalCoinContainer.text = string.Concat(delta < 0 ? "" : "+",delta.ToString());
+            additionalCoinContainer.text = string.Concat(delta < 0 ? "" : "+", delta.ToString());
             additionalCoinContainer.visible = true;
-            
-            if(delayVisible != null){
+
+            if (delayVisible != null)
+            {
                 StopCoroutine(delayVisible);
             }
-            else{
+            else
+            {
                 mainCoinContainer.parent.ToggleInClassList(hiddenPopName);
-            }   
+            }
         }
 
         private IEnumerator SimulateCoinReceive(CoinReceiveData data){

@@ -8,6 +8,8 @@ namespace Project.GameDb
     {
         public event Action<int> PlayerHealthChangedEvent;
         public event Action<int> PlayerReceiveGoldEvent;
+        public event Action<int> PlayerMaxHealthChangedEvent;
+
         [SerializeField] Project.PlayerBehaviour.PlayerData PlayerData;
         private Project.PlayerBehaviour.PlayerInventoryData _inventoryData;
 
@@ -31,14 +33,25 @@ namespace Project.GameDb
             }
         }
 
+        public int MaxHealth { 
+            get => (int)PlayerData.MaxHealth; 
+            set {
+                PlayerData.MaxHealth = (uint)value;
+                PlayerMaxHealthChangedEvent?.Invoke(value);
+            } 
+        }
+
         public void MapFrom(Project.PlayerBehaviour.PlayerData playerData)
         {
             PlayerData = playerData;
+            PlayerMaxHealthChangedEvent?.Invoke((int)playerData.MaxHealth);
+            PlayerHealthChangedEvent?.Invoke((int)playerData.Health);
         }
 
         public void MapFrom(PlayerBehaviour.PlayerInventoryData inventoryData)
         {
             _inventoryData = inventoryData;
+            PlayerReceiveGoldEvent?.Invoke(inventoryData.Gold);
         }
     }
 }

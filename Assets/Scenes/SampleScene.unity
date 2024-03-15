@@ -494,7 +494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340174993}
-  - component: {fileID: 340174991}
+  - component: {fileID: 340174994}
   - component: {fileID: 340174992}
   m_Layer: 0
   m_Name: TestView
@@ -503,27 +503,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &340174991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340174990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c37655f47b364b3aa2d18c5354f1c34b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _localizationAssetTables:
-  - m_TableReference:
-      m_TableCollectionName: GUID:512346665aa33884fbbcdbb8eab49fb0
-  _localizationStringTables:
-  - m_TableReference:
-      m_TableCollectionName: GUID:2fdf0044c3c86034f835118994e4344d
-  _asset: {fileID: 9197481963319205126, guid: d7851e36da7c06c4595e39b864327a87, type: 3}
-  _sortLayer: 0
-  _bindingContext: {fileID: 340174992}
 --- !u!114 &340174992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +530,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 92196031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340174994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340174990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4b4808093aeda428eb460413079def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizationAssetTables: []
+  _localizationStringTables: []
+  _asset: {fileID: 9197481963319205126, guid: d7851e36da7c06c4595e39b864327a87, type: 3}
+  _sortLayer: 0
+  _bindingContext: {fileID: 340174992}
+  healthProgressbarConfig: {fileID: 11400000, guid: ac051c74ebc0a9d46b2ab20adbc04ec4, type: 2}
+  avatarAssetDefinition: {fileID: 11400000, guid: 8c38ff505b25eb544a19b4fb043876f7, type: 2}
 --- !u!4 &400870842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3996921484589512472, guid: fbff4bd63a58a77449e95836d0436a4d, type: 3}
@@ -7454,7 +7452,7 @@ MonoBehaviour:
   _sortLayer: 0
   _bindingContext: {fileID: 340174992}
   _containerName: coinPopup
-  _parent: {fileID: 340174991}
+  _parent: {fileID: 340174994}
   popupAsset: {fileID: 11400000, guid: 0f7a9053d94a551438106ed05d558a30, type: 2}
   popDuration: 8
   mainCoinContainerName: mainLabel
@@ -8045,6 +8043,7 @@ GameObject:
   - component: {fileID: 1441871652}
   - component: {fileID: 1441871653}
   - component: {fileID: 1441871654}
+  - component: {fileID: 1441871655}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8093,6 +8092,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dacaf66d1d79f4388bafd80647f412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1441871655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441871651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04451386798147545ba730e58ca109a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 200
 --- !u!4 &1607245853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4761544065421609993, guid: 792bbafd8ae6fef4a9768e4428cae8c3, type: 3}

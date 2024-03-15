@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511a606953fdc4845975048001f4c9d3, type: 3}
+  m_Name: ProgressBarAssetDefinition
+  m_EditorClassIdentifier: 
+  styleSheet: {fileID: 0}
+  headBackground: {fileID: -1643111429, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  middleBackground: {fileID: -2084108481, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  tailBackground: {fileID: -164483969, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  headFill: {fileID: -245701351, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  middleFill: {fileID: 645499410, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  tailFill: {fileID: -778506704, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  direction: 0
+  partitialThreshold: 100
+  size: {x: 40, y: 25}

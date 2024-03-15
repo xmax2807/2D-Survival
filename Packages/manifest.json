@@ -1,5 +1,5 @@
 {
-"dependencies": {
+  "dependencies": {
     "com.bustedbunny.mvvmtoolkit": "https://github.com/bustedbunny/com.bustedbunny.mvvmtoolkit.git",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.unity.cinemachine": "2.9.7",

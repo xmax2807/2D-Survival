@@ -7,10 +7,10 @@ namespace Project.UIToolKit.Asset
     [CreateAssetMenu(fileName = "PopupAsset", menuName = "UIToolKit/Assets/PopupAsset")]
     public class PopupAssetDefinition : ScriptableObject
     {
-        [SerializeField] Texture2D icon;
-        [SerializeField] Texture2D background;
+        [SerializeField] Sprite icon;
+        [SerializeField] Sprite background;
 
-        public Texture2D Icon => icon;
-        public Texture2D Background => background;
+        public Sprite Icon => icon;
+        public Sprite Background => background;
     }
 }

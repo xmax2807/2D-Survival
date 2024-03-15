@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/progressBar_PlayerHUD.uss?fileID=7433441132597879392&amp;guid=2a5b436c0f41db84ab72c314e087a350&amp;type=3#progressBar_PlayerHUD" />
+    <ui:VisualElement style="flex-grow: 1; background-image: none; background-color: rgba(255, 255, 255, 0); flex-direction: row; max-height: 20px;">
+        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI/3.png?fileID=-1643111429&amp;guid=9e266723cd15fd24ea00f694eaaa32f7&amp;type=3#3_1&apos;);" />
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(100, 100, 100, 0); background-image: none; flex-direction: row;">
+            <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI/3.png?fileID=-2084108481&amp;guid=9e266723cd15fd24ea00f694eaaa32f7&amp;type=3#3_2&apos;);" />
+            <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI/3.png?fileID=-2084108481&amp;guid=9e266723cd15fd24ea00f694eaaa32f7&amp;type=3#3_2&apos;);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI/3.png?fileID=-164483969&amp;guid=9e266723cd15fd24ea00f694eaaa32f7&amp;type=3#3_165&apos;); -unity-slice-scale: 2.5px;" />
+    </ui:VisualElement>
+</ui:UXML>
