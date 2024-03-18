@@ -27,11 +27,13 @@ namespace Project.MVVM
             var serviceProvider = new ServiceProvider();
             serviceProvider.RegisterService<IPlayerHUDRepository>(playerData);
 
-            playerData.MapFrom(new PlayerBehaviour.PlayerData(100, 1, 10, 5, 10));
-            playerData.MapFrom(new PlayerBehaviour.PlayerInventoryData());
+            
             // Before we can make any calls to UI, we need to await it's initialization
             await root.Initialize(messenger, serviceProvider);
-            playableDirector.Play();
+
+            // playerData.MapFrom(new PlayerBehaviour.PlayerData(1000, 1, 10, 5, 10));
+            // playerData.MapFrom(new PlayerBehaviour.PlayerInventoryData());
+            // playerData.Health = 100;
             //messenger.Send<OpenTestViewMessage>();
         }
     }

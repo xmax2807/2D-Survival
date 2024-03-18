@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="SmallPopup" src="project://database/Assets/UI/TemplateAssets/SmallPopup.uxml?fileID=9197481963319205126&amp;guid=35fdf644c23acce4185289be36bf036e&amp;type=3#SmallPopup" />
     <Style src="project://database/Assets/UI/USS/anim_PopUpStyles.uss?fileID=7433441132597879392&amp;guid=b74ec3c8d8707ea4cb2013cc411b64c0&amp;type=3#anim_PopUpStyles" />
-    <Project.UIToolKit.CoinPopup />
+    <ui:Instance template="SmallPopup" name="SmallPopup" />
 </ui:UXML>

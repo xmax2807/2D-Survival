@@ -8,7 +8,7 @@ namespace Project.GameFlowSystem
     [System.Serializable]
     public class SequenceData
     {
-        [SerializeField]public CommandType commandType;
+        [SerializeField]public CommandType[] commandTypes;
     }
 
     [System.Serializable]

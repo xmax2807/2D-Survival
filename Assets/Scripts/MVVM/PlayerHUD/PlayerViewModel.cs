@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using MVVMToolkit;
 using MVVMToolkit.DependencyInjection;
 using Project.GameDb;
+using System;
 namespace Project.MVVM.PlayerHUD
 {
     public partial class PlayerViewModel : ViewModel
@@ -11,12 +12,21 @@ namespace Project.MVVM.PlayerHUD
         private IPlayerHUDRepository playerHUDRepository;
 
         [ObservableProperty] int _health;
+        [ObservableProperty] int _maxHealth;
         int _coin;
         readonly CoinReceiveData _coinReceiveData = new();
 
         protected override void OnInit(){
             playerHUDRepository.PlayerHealthChangedEvent += OnPlayerHealthChanged;
+            playerHUDRepository.PlayerMaxHealthChangedEvent += OnPlayerMaxHealthChanged;
             playerHUDRepository.PlayerReceiveGoldEvent += OnPlayerReceiveCoin;
+            
+        }
+
+        protected override void OnDestroy(){
+            playerHUDRepository.PlayerHealthChangedEvent -= OnPlayerHealthChanged;
+            playerHUDRepository.PlayerMaxHealthChangedEvent -= OnPlayerMaxHealthChanged;
+            playerHUDRepository.PlayerReceiveGoldEvent -= OnPlayerReceiveCoin;
         }
 
         private void OnPlayerReceiveCoin(int additionalValue)
@@ -26,9 +36,9 @@ namespace Project.MVVM.PlayerHUD
             this.Messenger.Send<CoinReceiveData>(_coinReceiveData);
         }
 
-        protected override void OnDestroy(){
-            playerHUDRepository.PlayerHealthChangedEvent -= OnPlayerHealthChanged;
-            playerHUDRepository.PlayerReceiveGoldEvent -= OnPlayerReceiveCoin;
+        private void OnPlayerMaxHealthChanged(int value)
+        {
+            MaxHealth = value;
         }
 
         private void OnPlayerHealthChanged(int value)

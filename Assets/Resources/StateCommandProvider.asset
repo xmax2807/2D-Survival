@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbceade46875414fa253b3db7511bb6, type: 3}
   m_Name: StateCommandProvider
   m_EditorClassIdentifier: 
+  _stateTypes:
+  - _assemblyQualifiedName: Project.GameStateCommand.SaveGameCommand, Project, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - _assemblyQualifiedName: Project.GameStateCommand.TestCommand, Project, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - _assemblyQualifiedName: Project.GameStateCommand.LoadSystemCommand, Project,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - _assemblyQualifiedName: Project.GameStateCommand.LoadMainGamePlayScene, Project,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

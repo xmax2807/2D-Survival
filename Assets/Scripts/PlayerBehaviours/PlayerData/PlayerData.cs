@@ -7,6 +7,7 @@ namespace Project.PlayerBehaviour
     [System.Serializable, MessagePackObject(true)]
     public class PlayerData : ISaveable
     {
+        public uint MaxHealth { get; set; }
         public uint Health { get; set; }
         public float MoveSpeed { get; set; }
         public float Attack { get; set; }
@@ -19,7 +20,7 @@ namespace Project.PlayerBehaviour
         public static PlayerData Randomize(){
             return new()
             {
-                Health = (uint)UnityEngine.Random.Range(0, 100),
+                MaxHealth = (uint)UnityEngine.Random.Range(0, 100),
                 MoveSpeed = UnityEngine.Random.Range(0f, 1f),
                 Attack = UnityEngine.Random.Range(0f, 100f),
                 Defense = UnityEngine.Random.Range(0f, 100f),
@@ -32,6 +33,7 @@ namespace Project.PlayerBehaviour
         }
 
         public PlayerData(PlayerData clone) : this(){
+            MaxHealth = clone.MaxHealth;
             Health = clone.Health;
             MoveSpeed = clone.MoveSpeed;
             Attack = clone.Attack;
@@ -40,6 +42,7 @@ namespace Project.PlayerBehaviour
         }
 
         public PlayerData(uint health, float moveSpeed, float attack, float defense, float criticalRate) : this(){
+            MaxHealth = health;
             Health = health;
             MoveSpeed = moveSpeed;
             Attack = attack;
@@ -49,7 +52,7 @@ namespace Project.PlayerBehaviour
 
         public override string ToString()
         {
-            return $"Health: {Health}, MoveSpeed: {MoveSpeed}, Attack: {Attack}, Defense: {Defense}, CriticalRate: {CriticalRate}";
+            return $"Health: {MaxHealth}, MoveSpeed: {MoveSpeed}, Attack: {Attack}, Defense: {Defense}, CriticalRate: {CriticalRate}";
         }
     }
 

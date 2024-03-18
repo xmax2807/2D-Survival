@@ -10,6 +10,7 @@
   <xs:import schemaLocation="UnityEditor.AddressableAssets.GUIElements.xsd" namespace="UnityEditor.AddressableAssets.GUIElements" />
   <xs:import schemaLocation="UnityEditor.ShaderGraph.Drawing.xsd" namespace="UnityEditor.ShaderGraph.Drawing" />
   <xs:include schemaLocation="GlobalNamespace.xsd" />
+  <xs:import schemaLocation="Project.UIToolKit.xsd" namespace="Project.UIToolKit" />
   <xs:import schemaLocation="UnityEditor.Rendering.LookDev.xsd" namespace="UnityEditor.Rendering.LookDev" />
   <xs:import schemaLocation="UnityEditor.Localization.UI.xsd" namespace="UnityEditor.Localization.UI" />
   <xs:import schemaLocation="UnityEditor.UIElements.Debugger.xsd" namespace="UnityEditor.UIElements.Debugger" />

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b910fd606c3720b45b7139efb355a0ac, type: 3}
   m_Name: PopupAsset
   m_EditorClassIdentifier: 
-  icon: {fileID: 8228938214290033325, guid: 9a45f7e7c94fcb94994b89c35e2e1a53, type: 3}
-  background: {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -1233121199, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
+  background: {fileID: 576791235, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}

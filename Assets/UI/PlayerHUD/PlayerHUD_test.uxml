@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label tabindex="-1" text="$Health={Health}" />
-    <ui:GroupBox style="width: 100px; height: 100%; flex-shrink: 1; right: auto; flex-direction: column; align-self: flex-end;">
-        <ui:VisualElement name="coinPopup" style="flex-grow: 1;" />
+    <ui:VisualElement style="flex-grow: 1; min-height: 180px; background-image: url(&apos;project://database/Assets/UI/PlayerHUD/main_HUD.png?fileID=21300000&amp;guid=767c1c15cfd99e44a832f19525509599&amp;type=3#main_HUD&apos;); max-width: 25%; -unity-background-scale-mode: stretch-to-fill; -unity-slice-top: 75; -unity-slice-right: 60; -unity-slice-scale: 1.1px; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; -unity-slice-left: 60; -unity-slice-bottom: 75; flex-direction: row; min-width: auto;">
+        <ui:VisualElement name="mainHUD" style="flex-grow: 0; left: 64px; width: 72%; height: 65px; top: 56px; flex-direction: row;" />
+    </ui:VisualElement>
+    <ui:GroupBox style="width: 10%; height: 100%; flex-shrink: 1; right: auto; flex-direction: column; align-self: flex-end;">
+        <ui:VisualElement name="coinPopup" style="flex-grow: 1; max-height: 200px; top: 50%;" />
     </ui:GroupBox>
 </ui:UXML>

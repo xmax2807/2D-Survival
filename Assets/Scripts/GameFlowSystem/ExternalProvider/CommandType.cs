@@ -4,5 +4,7 @@ namespace Project.GameFlowSystem
     {
         PlaySplashScreen,
         PauseGame,
+        LoadSystem,
+        LoadMainGame
     }
 }
