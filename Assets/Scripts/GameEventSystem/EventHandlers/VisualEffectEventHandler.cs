@@ -2,6 +2,7 @@ using System;
 using Project.GameDb;
 using Project.GameDb.ScriptableDatabase;
 using Project.Manager;
+using Project.VisualEffectSystem;
 
 namespace Project.GameEventSystem
 {
@@ -9,9 +10,11 @@ namespace Project.GameEventSystem
     {
         readonly Action<VisualEffectEventData> VisualEffectCallback;
         readonly Lazy<IVFXRepository> _lazyVFXRepo;
+        readonly Lazy<VisualEffectManager> _lazyVFXManager;
         public VisualEffectEventHandler(IEventAPI eventAPI) : base(eventAPI)
         {
-            _lazyVFXRepo = new Lazy<IVFXRepository>(() => GameManager.RepoProvider.GetRepository<IVFXRepository>());
+            _lazyVFXRepo = new Lazy<IVFXRepository>(() => GameManager.Instance.GetService<IDatabaseRepoProvider>().GetRepository<IVFXRepository>());
+            _lazyVFXManager = new Lazy<VisualEffectManager>(() => GameManager.Instance.GetService<VisualEffectManager>());
             VisualEffectCallback = OnVisualEffectCallback;
         }
 
@@ -33,7 +36,7 @@ namespace Project.GameEventSystem
 
                 if (effect != null)
                 {
-                    GameManager.VFXManager.AnimatorEffectService.PlayEffectAt(effect.stateId, data.Position);
+                    _lazyVFXManager.Value?.AnimatorEffectService.PlayEffectAt(effect.stateId, data.Position);
                 }
             }
         }

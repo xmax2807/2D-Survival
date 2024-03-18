@@ -31,9 +31,9 @@ namespace Project.MVVM
             // Before we can make any calls to UI, we need to await it's initialization
             await root.Initialize(messenger, serviceProvider);
 
-            playerData.MapFrom(new PlayerBehaviour.PlayerData(1000, 1, 10, 5, 10));
-            playerData.MapFrom(new PlayerBehaviour.PlayerInventoryData());
-            playerData.Health = 100;
+            // playerData.MapFrom(new PlayerBehaviour.PlayerData(1000, 1, 10, 5, 10));
+            // playerData.MapFrom(new PlayerBehaviour.PlayerInventoryData());
+            // playerData.Health = 100;
             //messenger.Send<OpenTestViewMessage>();
         }
     }

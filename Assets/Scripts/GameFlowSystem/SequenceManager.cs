@@ -13,11 +13,8 @@ namespace Project.GameFlowSystem
         private List<IGameState> _gameStates;
         private IGameState _initialState;
 
-        void Awake(){
-            configurationSO.BuildGameStates(ref _gameStates, ref _initialState);
-        }
-
         void Start(){
+            configurationSO.BuildGameStates(ref _gameStates, ref _initialState);
             _gameStateMachine.ChangeState(_initialState);
         }
 

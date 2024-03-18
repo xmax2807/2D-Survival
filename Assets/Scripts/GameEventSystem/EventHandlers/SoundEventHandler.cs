@@ -1,5 +1,6 @@
 using System;
 using Project.AudioSystem;
+using Project.GameDb;
 using Project.GameDb.ScriptableDatabase;
 using Project.Manager;
 
@@ -16,7 +17,7 @@ namespace Project.GameEventSystem
             FullPlaySoundCallback = HandleFullSoundCallback;
             PlaySoundCallback = HandleSoundCallback;
 
-            _lazySoundRepo = new Lazy<ISoundRepository>(() => GameManager.RepoProvider.GetRepository<ISoundRepository>());
+            _lazySoundRepo = new Lazy<ISoundRepository>(() => GameManager.Instance.GetService<IDatabaseRepoProvider>().GetRepository<ISoundRepository>());
         }
 
         public override void RegisterToAPI(){

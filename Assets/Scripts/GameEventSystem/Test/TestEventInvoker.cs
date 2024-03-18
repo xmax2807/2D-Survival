@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Project.GameEventSystem
+namespace Project.GameEventSystem.Test
 {
     public class TestEventInvoker : MonoBehaviour
     {

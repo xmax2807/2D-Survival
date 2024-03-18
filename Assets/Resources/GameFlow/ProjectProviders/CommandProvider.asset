@@ -17,4 +17,8 @@ MonoBehaviour:
     CommandName: TestCommand
   - CommandType: 1
     CommandName: TestCommand
+  - CommandType: 2
+    CommandName: LoadSystemCommand
+  - CommandType: 3
+    CommandName: LoadMainGamePlayScene
   m_stateCommandProvider: {fileID: 11400000, guid: 3a8b5aea13dfac84ab338ff9dce604ef, type: 2}

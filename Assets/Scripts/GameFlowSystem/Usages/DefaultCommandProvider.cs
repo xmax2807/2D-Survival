@@ -42,20 +42,6 @@ namespace Project.GameFlowSystem.InProject
             throw new System.NotImplementedException($"Command with type {commandType} not found");
         }
 
-        public override IGameStateCommand GetCommand(CommandType commandType, params object[] parameters)
-        {
-            if(m_commandMap == null){
-                Init();
-            }
-
-            if(m_commandMap.ContainsKey(commandType)){
-                var command = m_stateCommandProvider.GetCommand(m_commandMap[commandType].CommandName, parameters);
-                return new GameStateCommandAdapter(command);
-            }
-
-            throw new System.NotImplementedException($"Command with type {commandType} not found");
-        }
-
         public class GameStateCommandAdapter : IGameStateCommand
         {
             readonly Project.GameStateCommand.IGameStateCommand m_command;

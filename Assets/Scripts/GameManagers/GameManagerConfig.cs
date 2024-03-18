@@ -21,18 +21,6 @@ namespace Project.Manager
         public TargetEffectEventManager TargetEffectEventManager { get; private set; }
         #endregion
 
-        #region Game Event Config
-        public IGameEventRegister GameEventRegisterer => _gameEventService;
-        public IGameEventPublisher GameEventPublisher => _gameEventService;
-        private GameEventService _gameEventService;
-
-        private ScriptableEventProvider _gameEventProvider;
-        public IEventInvoker GameEventInvoker => _gameEventProvider;
-        public IEventProvider GameEventProvider => _gameEventProvider;
-
-        private IEventAPI _gameEventAPI;
-        public static IEventAPI GameEventAPI => _instance._gameEventAPI;
-        #endregion
 
         #region LOD Config
         private VisibleRendererStorage m_visibleRendererStorage;
@@ -59,28 +47,11 @@ namespace Project.Manager
         public static ILootSystemAPI LootSystem => _instance.m_lootSystemConfiguration.LootSystem;
         #endregion
 
-        #region VFX System
-        [SerializeField] VisualEffectSystemConfig m_vfxSystemConfiguration;
-        public static VisualEffectManager VFXManager { get; private set; }
-        #endregion
-
         [SerializeField] InputHandler_InputSystem m_inputSystem;
         public IInputHandler InputHandler => m_inputSystem;
 
         void OnEnable()
         {
-
-            // Init Coroutines
-            Utils.Coroutines.Initialize(this);
-            CoroutineCommandQueue = new Queue<IEnumerator>();
-            StartCoroutine(RunQueueCommands());
-            //
-
-            _gameEventProvider = Resources.Load<GameEventSystem.ScriptableEventProvider>("EventSystem_EventProvider");
-            _gameEventAPI = Resources.Load<GameEventAPI>("EventSystem_GameEventAPI");
-            DefineEventHandlers();
-
-            CoroutineCommandQueue.Enqueue(InitializeDatabase(filePath: "ScriptableDatabaseRepoProvider"));
             InitializeLootSystem(filePath: "LootSystemConfiguration");
 
             GetParams();
@@ -97,45 +68,12 @@ namespace Project.Manager
             m_lootSystemConfiguration = Resources.Load<LootSystemConfiguration>(filePath);
             m_lootSystemConfiguration.Initialize(this.transform);
         }
-
-        private IEnumerator InitializeDatabase(string filePath)
-        {
-            var request = Resources.LoadAsync<GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider>(filePath);
-            yield return request;
-            m_scriptableDatabase = request.asset as GameDb.ScriptableDatabase.ScriptableDatabaseRepoProvider;
-            yield return m_scriptableDatabase.Initialize();
-            VFXManager = new VisualEffectManager(m_vfxSystemConfiguration);
-        }
-
-        private IEnumerator RunQueueCommands()
-        {
-            while (true)
-            {
-                if (CoroutineCommandQueue.Count > 0)
-                {
-                    yield return CoroutineCommandQueue.Dequeue();
-                }
-                else
-                {
-                    yield return null;
-                }
-            }
-        }
-
-        void DefineEventHandlers()
-        {
-            _gameEventService = new GameEventService();
-            _gameEventService.AddHandler(new SoundEventHandler(_gameEventAPI));
-            _gameEventService.AddHandler(new VisualEffectEventHandler(_gameEventAPI));
-            _gameEventService.AddHandler(new PhysicEventHandler(_gameEventAPI));
-            _gameEventService.AddHandler(new ItemEventHandler(_gameEventAPI));
-            _gameEventService.AddHandler(new ItemDropEventHandler(_gameEventAPI));
-        }
+        
         void GetParams()
         {
-            GameParams.ScriptableParamProvider _LoadParams = Resources.Load<GameParams.ScriptableParamProvider>("ParamProvider");
-            _LoadParams.Initialize();
-            _params = _LoadParams;
+            GameParams.ScriptableParamProvider paramProvider = Resources.Load<GameParams.ScriptableParamProvider>("ParamProvider");
+            paramProvider.Initialize();
+            _params = paramProvider;
         }
     }
 }

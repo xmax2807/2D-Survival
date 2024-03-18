@@ -17,3 +17,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   - _assemblyQualifiedName: Project.GameStateCommand.TestCommand, Project, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - _assemblyQualifiedName: Project.GameStateCommand.LoadSystemCommand, Project,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - _assemblyQualifiedName: Project.GameStateCommand.LoadMainGamePlayScene, Project,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

@@ -19,15 +19,10 @@ namespace Project.GameStateCommand
             if(!m_stateCommands.ContainsKey(name)){
                 throw new System.Exception($"Command with name {name} not found");
             }
-            return m_stateCommands[name];
-        }
-
-        public IGameStateCommand GetCommand(string name, params object[] parameters){
-            if(!m_stateCommands.ContainsKey(name)){
-                throw new System.Exception($"Command with name {name} not found");
+            if(m_stateCommands[name] == null){
+                throw new System.NotImplementedException($"Command with name {name} is not implemented");
             }
-
-            return m_stateCommands[name].Clone(parameters);
+            return m_stateCommands[name];
         }
 
         void OnEnable(){
@@ -36,7 +31,7 @@ namespace Project.GameStateCommand
                     continue;
                 }
 
-                m_stateCommands[type.Type.Name] = (IGameStateCommand)Activator.CreateInstance(type.Type);
+                m_stateCommands[type.Type.Name] = null;
             }
         }
 
@@ -60,6 +55,12 @@ namespace Project.GameStateCommand
                 }
             }
             return -1;
+        }
+
+        internal void AddCommand(IGameStateCommand command)
+        {
+            if(command == null) return;
+            m_stateCommands[command.GetType().Name] = command;
         }
 
         private static string[] _stateNames;

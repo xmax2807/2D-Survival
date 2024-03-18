@@ -24,7 +24,13 @@ namespace Project.PlayerBehaviour{
         }
 
         void OnEnable(){
-            GameManager.Instance.GameEventRegisterer.Register<IEffect>(GameEventType.EffectAdded, OnEffectAdded);
+            var GameEventRegisterer = GameManager.Instance.GetService<IGameEventRegister>();
+            GameEventRegisterer.Register<IEffect>(GameEventType.EffectAdded, OnEffectAdded);
+        }
+
+        void OnDisable(){
+            var GameEventRegisterer = GameManager.Instance.GetService<IGameEventRegister>();
+            GameEventRegisterer.Unregister<IEffect>(GameEventType.EffectAdded, OnEffectAdded);
         }
 
         private void OnEffectAdded(IEffect effect)

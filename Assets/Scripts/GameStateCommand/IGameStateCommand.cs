@@ -6,7 +6,6 @@ namespace Project.GameStateCommand
     {
         bool Finished { get; }
 
-        IGameStateCommand Clone(object[] parameters);
         IEnumerator Execute();
     }
 

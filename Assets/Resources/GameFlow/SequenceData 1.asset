@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _builderId: LaunchState
   _sequenceData:
-    commandTypes: 000000000000000000000000000000000000000000000000
+    commandTypes: 03000000
   _links: []
