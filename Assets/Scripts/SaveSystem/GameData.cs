@@ -20,6 +20,9 @@ namespace Project.SaveSystem
                 dictionary[keys[i]] = values[i];
             }
         }
+
+        [IgnoreMember]
+        public GameData Result => new GameData(this.ToDictionary());
     }
 
     public class GameData
@@ -34,6 +37,11 @@ namespace Project.SaveSystem
         {
             System.Text.StringBuilder sb = new();
             foreach (var kvp in SaveablesDict){
+                UnityEngine.Debug.Log($"{kvp.Key}-{kvp.Value}");
+                if(kvp.Value == null){
+                    UnityEngine.Debug.Log($"{kvp.Key} has null value");
+                    continue;
+                }
                 sb.Append(kvp.Value.ToString());
             }
 

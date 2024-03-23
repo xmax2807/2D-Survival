@@ -21,7 +21,7 @@ namespace Project.UIToolKit.Asset
         public Sprite tailFill;
         public Direction direction;
 
-        public float partitialThreshold = 0.2f; // for each 0.2f gain or lost => do a partitial fill
+        public int baseMaxValue = 10;
         public Vector2 size;
     }
 }

@@ -47,15 +47,16 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(8)
             {
                 { typeof(global::System.Collections.Generic.List<global::Project.SaveSystem.ISaveable>), 0 },
                 { typeof(global::System.Collections.Generic.List<global::System.Type>), 1 },
                 { typeof(global::Project.SaveSystem.ISaveable), 2 },
                 { typeof(global::Project.PlayerBehaviour.PlayerData), 3 },
-                { typeof(global::Project.SaveSystem.SerializableGameData), 4 },
-                { typeof(global::Project.SaveSystem.TestSaveData), 5 },
-                { typeof(global::Project.Utils.SerializableGuid), 6 },
+                { typeof(global::Project.PlayerBehaviour.PlayerInventoryData), 4 },
+                { typeof(global::Project.SaveSystem.SerializableGameData), 5 },
+                { typeof(global::Project.SaveSystem.TestSaveData), 6 },
+                { typeof(global::Project.Utils.SerializableGuid), 7 },
             };
         }
 
@@ -73,9 +74,10 @@ namespace MessagePack.Resolvers
                 case 1: return new global::MessagePack.Formatters.ListFormatter<global::System.Type>();
                 case 2: return new MessagePack.Formatters.Project.SaveSystem.ISaveableFormatter();
                 case 3: return new MessagePack.Formatters.Project.PlayerBehaviour.PlayerDataFormatter();
-                case 4: return new MessagePack.Formatters.Project.SaveSystem.SerializableGameDataFormatter();
-                case 5: return new MessagePack.Formatters.Project.SaveSystem.TestSaveDataFormatter();
-                case 6: return new MessagePack.Formatters.Project.Utils.SerializableGuidFormatter();
+                case 4: return new MessagePack.Formatters.Project.PlayerBehaviour.PlayerInventoryDataFormatter();
+                case 5: return new MessagePack.Formatters.Project.SaveSystem.SerializableGameDataFormatter();
+                case 6: return new MessagePack.Formatters.Project.SaveSystem.TestSaveDataFormatter();
+                case 7: return new MessagePack.Formatters.Project.Utils.SerializableGuidFormatter();
                 default: return null;
             }
         }
@@ -114,15 +116,17 @@ namespace MessagePack.Formatters.Project.SaveSystem
 
         public ISaveableFormatter()
         {
-            this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(2, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
+            this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(3, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
             {
                 { typeof(global::Project.PlayerBehaviour.PlayerData).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
                 { typeof(global::Project.SaveSystem.TestSaveData).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(1, 1) },
+                { typeof(global::Project.PlayerBehaviour.PlayerInventoryData).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(2, 2) },
             };
-            this.keyToJumpMap = new global::System.Collections.Generic.Dictionary<int, int>(2)
+            this.keyToJumpMap = new global::System.Collections.Generic.Dictionary<int, int>(3)
             {
                 { 0, 0 },
                 { 1, 1 },
+                { 2, 2 },
             };
         }
 
@@ -140,6 +144,9 @@ namespace MessagePack.Formatters.Project.SaveSystem
                         break;
                     case 1:
                         global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Project.SaveSystem.TestSaveData>(options.Resolver).Serialize(ref writer, (global::Project.SaveSystem.TestSaveData)value, options);
+                        break;
+                    case 2:
+                        global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Project.PlayerBehaviour.PlayerInventoryData>(options.Resolver).Serialize(ref writer, (global::Project.PlayerBehaviour.PlayerInventoryData)value, options);
                         break;
                     default:
                         break;
@@ -179,6 +186,9 @@ namespace MessagePack.Formatters.Project.SaveSystem
                     break;
                 case 1:
                     result = (global::Project.SaveSystem.ISaveable)global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Project.SaveSystem.TestSaveData>(options.Resolver).Deserialize(ref reader, options);
+                    break;
+                case 2:
+                    result = (global::Project.SaveSystem.ISaveable)global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Project.PlayerBehaviour.PlayerInventoryData>(options.Resolver).Deserialize(ref reader, options);
                     break;
                 default:
                     reader.Skip();
@@ -222,6 +232,8 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
 {
     public sealed class PlayerDataFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Project.PlayerBehaviour.PlayerData>
     {
+        // MaxHealth
+        private static global::System.ReadOnlySpan<byte> GetSpan_MaxHealth() => new byte[1 + 9] { 169, 77, 97, 120, 72, 101, 97, 108, 116, 104 };
         // Health
         private static global::System.ReadOnlySpan<byte> GetSpan_Health() => new byte[1 + 6] { 166, 72, 101, 97, 108, 116, 104 };
         // MoveSpeed
@@ -244,7 +256,9 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(6);
+            writer.WriteMapHeader(7);
+            writer.WriteRaw(GetSpan_MaxHealth());
+            writer.Write(value.MaxHealth);
             writer.WriteRaw(GetSpan_Health());
             writer.Write(value.Health);
             writer.WriteRaw(GetSpan_MoveSpeed());
@@ -269,6 +283,8 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
             options.Security.DepthStep(ref reader);
             var formatterResolver = options.Resolver;
             var length = reader.ReadMapHeader();
+            var __MaxHealth__IsInitialized = false;
+            var __MaxHealth__ = default(uint);
             var __Health__ = default(uint);
             var __MoveSpeed__ = default(float);
             var __Attack__ = default(float);
@@ -284,6 +300,24 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
                     FAIL:
                       reader.Skip();
                       continue;
+                    case 9:
+                        switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
+                        {
+                            default: goto FAIL;
+                            case 8389187293519831373UL:
+                                if (stringKey[0] != 104) { goto FAIL; }
+
+                                __MaxHealth__IsInitialized = true;
+                                __MaxHealth__ = reader.ReadUInt32();
+                                continue;
+
+                            case 7306369473965354829UL:
+                                if (stringKey[0] != 100) { goto FAIL; }
+
+                                __MoveSpeed__ = reader.ReadSingle();
+                                continue;
+
+                        }
                     case 6:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
@@ -295,11 +329,6 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
                                 __Attack__ = reader.ReadSingle();
                                 continue;
                         }
-                    case 9:
-                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_MoveSpeed().Slice(1))) { goto FAIL; }
-
-                        __MoveSpeed__ = reader.ReadSingle();
-                        continue;
                     case 7:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 28555890632582468UL) { goto FAIL; }
 
@@ -320,6 +349,75 @@ namespace MessagePack.Formatters.Project.PlayerBehaviour
             }
 
             var ____result = new global::Project.PlayerBehaviour.PlayerData(__Health__, __MoveSpeed__, __Attack__, __Defense__, __CriticalRate__);
+            if (__MaxHealth__IsInitialized)
+            {
+                ____result.MaxHealth = __MaxHealth__;
+            }
+
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
+    public sealed class PlayerInventoryDataFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Project.PlayerBehaviour.PlayerInventoryData>
+    {
+        // Gold
+        private static global::System.ReadOnlySpan<byte> GetSpan_Gold() => new byte[1 + 4] { 164, 71, 111, 108, 100 };
+        // Id
+        private static global::System.ReadOnlySpan<byte> GetSpan_Id() => new byte[1 + 2] { 162, 73, 100 };
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Project.PlayerBehaviour.PlayerInventoryData value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value is null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            var formatterResolver = options.Resolver;
+            writer.WriteMapHeader(2);
+            writer.WriteRaw(GetSpan_Gold());
+            writer.Write(value.Gold);
+            writer.WriteRaw(GetSpan_Id());
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Project.Utils.SerializableGuid>(formatterResolver).Serialize(ref writer, value.Id, options);
+        }
+
+        public global::Project.PlayerBehaviour.PlayerInventoryData Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            var formatterResolver = options.Resolver;
+            var length = reader.ReadMapHeader();
+            var __Gold__ = default(int);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.Internal.CodeGenHelpers.ReadStringSpan(ref reader);
+                switch (stringKey.Length)
+                {
+                    default:
+                    FAIL:
+                      reader.Skip();
+                      continue;
+                    case 4:
+                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 1684827975UL) { goto FAIL; }
+
+                        __Gold__ = reader.ReadInt32();
+                        continue;
+                    case 2:
+                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 25673UL) { goto FAIL; }
+
+                        reader.Skip();
+                        continue;
+
+                }
+            }
+
+            var ____result = new global::Project.PlayerBehaviour.PlayerInventoryData(__Gold__);
             reader.Depth--;
             return ____result;
         }

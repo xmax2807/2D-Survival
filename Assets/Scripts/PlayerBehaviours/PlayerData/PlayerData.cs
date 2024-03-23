@@ -18,9 +18,11 @@ namespace Project.PlayerBehaviour
         public SerializableGuid Id => _id;
 
         public static PlayerData Randomize(){
+            uint health = (uint)UnityEngine.Random.Range(0, 100);
             return new()
             {
-                MaxHealth = (uint)UnityEngine.Random.Range(0, 100),
+                MaxHealth = health,
+                Health = health,
                 MoveSpeed = UnityEngine.Random.Range(0f, 1f),
                 Attack = UnityEngine.Random.Range(0f, 100f),
                 Defense = UnityEngine.Random.Range(0f, 100f),
@@ -60,10 +62,12 @@ namespace Project.PlayerBehaviour
     public class PlayerInventoryData : ISaveable{
         public int Gold { get; set; }
 
-        public SerializableGuid Id {get; private set;}
+        private SerializableGuid _id;
+        public SerializableGuid Id => _id;
 
-        public PlayerInventoryData(){
-            Id = SerializableGuid.NewGuid();
+        public PlayerInventoryData(int gold){
+            _id = SerializableGuid.NewGuid();
+            Gold = gold;
         }
     }   
 }

@@ -23,7 +23,9 @@ namespace Project.PlayerBehaviour
             serviceProvider.RegisterService<IPlayerHUDRepository>(playerManager.ScriptPlayerData);
             // Before we can make any calls to UI, we need to await it's initialization
             await PlayerHUD.Initialize(messenger, serviceProvider);
-            playerManager.ScriptPlayerData.MapFrom(playerManager.PlayerData);
+            
+            playerManager.ScriptPlayerData.MapFrom(playerManager.PlayerDataBinding.PlayerData);
+            playerManager.ScriptPlayerData.MapFrom(playerManager.PlayerInventoryDataBinding.PlayerInventoryData);
         }
     }
 }

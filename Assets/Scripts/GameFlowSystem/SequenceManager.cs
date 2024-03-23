@@ -9,7 +9,7 @@ namespace Project.GameFlowSystem
         [SerializeField] private SequenceConfiguration configurationSO;
         //Then build sequences
 
-        private readonly GameStateMachine _gameStateMachine = new GameStateMachine();
+        private readonly GameStateMachine _gameStateMachine = new();
         private List<IGameState> _gameStates;
         private IGameState _initialState;
 
@@ -20,6 +20,21 @@ namespace Project.GameFlowSystem
 
         void Update(){
             _gameStateMachine.Update();
+        }
+
+        void OnDisable(){
+            _gameStateMachine?.Stop();
+        }
+
+        void OnEnable(){
+            _gameStateMachine?.Resume();
+        }
+
+        void OnDestroy(){
+            configurationSO = null;
+            _gameStateMachine?.Dispose();
+            _gameStates = null;
+            _initialState = null;
         }
     }
 }

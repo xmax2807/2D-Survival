@@ -12,8 +12,8 @@ namespace Project.UIToolKit
         VisualElement _head;
         VisualElement _middleContainer;
         VisualElement _tail;
-        readonly float _partitialThreshold;
-        private int currentPartitials = 0;
+        readonly int _baseMaxValue;
+        private float currentPartitials = 0;
 
         int _maxValue = 1;
         public int maxValue {get => _maxValue; set => SetMaxValue(value);}
@@ -23,7 +23,7 @@ namespace Project.UIToolKit
 
         public PlayerHUD_ProgressBar(ProgressBarAssetDefinition config){
             _config = config;
-            _partitialThreshold = config.partitialThreshold;
+            _baseMaxValue = config.baseMaxValue;
             this.style.width = new StyleLength(StyleKeyword.Auto);
             this.pickingMode = PickingMode.Ignore;
 
@@ -81,25 +81,28 @@ namespace Project.UIToolKit
         private void SetValue(int newValue)
         {
             if(newValue != _value){
-                int partitial = (int)(newValue / _partitialThreshold);
-                if(partitial != currentPartitials){
-                    currentPartitials = partitial;
-                    UpdateUI();
-                }
                 _value = newValue;
-                this.MarkDirtyRepaint();
+                UpdateUI();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rate">from 0 to 1</param>
+        /// <param name="delta">from 0.0001 to 1</param>
         private void UpdateUI()
         {
-            
-            UnityEngine.Sprite headBackgroundSprite = currentPartitials == 0 ? _config.headBackground : _config.headFill;
+            int maxCount = (int)(_maxValue / _baseMaxValue);
+            maxCount = Mathf.Max(1, maxCount);
+            int partitialCount = (int)(_value/ _baseMaxValue);
+
+            UnityEngine.Sprite headBackgroundSprite = partitialCount == 0 ? _config.headBackground : _config.headFill;
             _head.style.backgroundImage = new StyleBackground(headBackgroundSprite);
 
-            int i = 1;
+            float i = 1;
             foreach(VisualElement e in _middleContainer.Children()){
-                if(i < currentPartitials){
+                if(i < partitialCount){
                     e.style.backgroundImage = new StyleBackground(_config.middleFill);
                 }else{
                     e.style.backgroundImage = new StyleBackground(_config.middleBackground);
@@ -107,7 +110,7 @@ namespace Project.UIToolKit
                 ++i;
             }
 
-            UnityEngine.Sprite tailBackgroundSprite = currentPartitials == (int)(maxValue/_partitialThreshold) ? _config.tailFill : _config.tailBackground;
+            UnityEngine.Sprite tailBackgroundSprite = partitialCount == maxCount ? _config.tailFill : _config.tailBackground;
             _tail.style.backgroundImage = new StyleBackground(tailBackgroundSprite);
         }
 
@@ -126,7 +129,10 @@ namespace Project.UIToolKit
         {
             if(value == 0 || value == _maxValue) return;
             _maxValue = value;
-            AddOrRemoveMiddlePartitials((int)(_maxValue/_partitialThreshold) - 2); // -2 because head and tail
+            int newMaxCount = _maxValue / this._baseMaxValue;
+            newMaxCount = Mathf.Max(1, newMaxCount);
+            AddOrRemoveMiddlePartitials(newMaxCount - 2); //-2 because head and tail
+            UpdateUI();
         }
 
         private void AddOrRemoveMiddlePartitials(int count)
@@ -149,7 +155,6 @@ namespace Project.UIToolKit
                     _middleContainer.Add(ele);
                 }
             }
-            UpdateUI();
         }
 
         private void OnAttachToPanelEvent(AttachToPanelEvent evt)

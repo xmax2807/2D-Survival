@@ -1,15 +1,24 @@
 using System;
 using System.Collections;
 using Project.Utils;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.GameFlowSystem
 {
-    public class GameStateMachine
+    public class GameStateMachine : IDisposable
     {
         public IGameState CurrentState { get; private set; }
         private Coroutine m_currentStateTask;
+
+        public void Resume(){
+            if(CurrentState == null){
+                Debug.LogWarning("GameStateMachine: No state to resume");
+                return;
+            }
+
+            CancelCurrentStateTask();
+            Coroutines.StartCoroutine(Play());
+        }
 
         public void ChangeState(IGameState newState)
         {
@@ -59,6 +68,11 @@ namespace Project.GameFlowSystem
             {
                 CancelCurrentStateTask();
             }
+        }
+
+        public void Dispose()
+        {
+            Stop();
             CurrentState = null;
         }
     }

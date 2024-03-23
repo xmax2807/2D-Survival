@@ -9,13 +9,14 @@ namespace Project.Manager
 {
     public partial class GameManager : MonoBehaviour
     {
+        private static bool m_isGamePlaying;
         private static GameManager _instance;
         public static GameManager Instance
         {
             get
             {
                 // game is not playing return null
-                if(!Application.isPlaying) return null;
+                if(!Application.isPlaying || m_isGamePlaying == false) return null;
 
                 if (_instance == null)
                 {
@@ -79,7 +80,7 @@ namespace Project.Manager
                 Destroy(this.gameObject);
                 return;
             }
-
+            m_isGamePlaying = true;
             InitializeCoroutine();
             InitializeGameCommands();
         }
@@ -152,11 +153,10 @@ namespace Project.Manager
         
         private void OnApplicationQuit()
         {
+            m_isGamePlaying = false;
             if (_instance == this)
             {
                 Destroy(_instance.m_visibleRendererStorage);
-                _instance = null;
-
                 Debug.Log("Quit Game");
             }
         }

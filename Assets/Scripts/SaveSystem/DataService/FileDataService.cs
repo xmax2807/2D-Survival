@@ -85,7 +85,7 @@ namespace Project.SaveSystem
 #if UNITY_EDITOR
                 UnityEngine.Debug.LogError(e.Message);
 #endif
-                return default(TObject);
+                return default;
             }
         }
 

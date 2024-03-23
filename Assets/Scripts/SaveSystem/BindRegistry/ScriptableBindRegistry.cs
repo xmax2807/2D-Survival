@@ -11,13 +11,16 @@ namespace Project.SaveSystem
         public static event Action<IBindRegistry> OnBindRegistryCreated;
         Dictionary<Type, Action<ISaveable>> m_registry;
 
-        public void BindAllToRegistered(ISaveable[] saveable){
-            for(int i = 0; i < saveable.Length; ++i){
+        public void BindAllToRegistered(ISaveable[] saveable)
+        {
+            for (int i = 0; i < saveable.Length; ++i)
+            {
                 Type saveableType = saveable[i].GetType();
-                if(m_registry[saveableType] == null){
-                    #if UNITY_EDITOR
+                if (m_registry[saveableType] == null)
+                {
+#if UNITY_EDITOR
                     Debug.LogWarning($"No binding found for {saveableType}");
-                    #endif
+#endif
                     continue;
                 }
                 m_registry[saveableType].Invoke(saveable[i]);
@@ -26,9 +29,12 @@ namespace Project.SaveSystem
 
         public void Initialize(Type[] typeNames)
         {
+#if UNITY_EDITOR
             Debug.Log("Initializing BindRegistry");
+#endif
             m_registry = new();
-            for(int i = 0; i < typeNames.Length; ++i){
+            for (int i = 0; i < typeNames.Length; ++i)
+            {
                 m_registry[typeNames[i]] = null;
             }
             OnBindRegistryCreated?.Invoke(this);
@@ -37,29 +43,32 @@ namespace Project.SaveSystem
         public void Register<TSaveable>(ISaveBind binder) where TSaveable : ISaveable
         {
             Type saveableType = typeof(TSaveable);
-            if(m_registry.ContainsKey(saveableType)){
+            if (m_registry.ContainsKey(saveableType))
+            {
                 m_registry[saveableType] += binder.Bind;
-
+#if UNITY_EDITOR
                 Debug.Log($"Data {saveableType} registered to {binder}");
+#endif
                 return;
             }
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.LogWarning($"No Data {saveableType} found in storage");
-            #endif
+#endif
         }
 
         public void Unregister<TSaveable>(ISaveBind binder) where TSaveable : ISaveable
         {
             Type saveableType = typeof(TSaveable);
-            if(m_registry.ContainsKey(saveableType)){
+            if (m_registry.ContainsKey(saveableType))
+            {
                 m_registry[saveableType] -= binder.Bind;
                 return;
             }
-            
-            #if UNITY_EDITOR
+
+#if UNITY_EDITOR
             Debug.LogWarning($"No Data {saveableType} found in storage");
-            #endif
+#endif
         }
     }
 }

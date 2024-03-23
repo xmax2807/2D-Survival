@@ -14,8 +14,8 @@ namespace Project.PlayerBehaviour
         [SerializeField] private ScriptPlayerData scriptPlayerData;
         public ScriptPlayerData ScriptPlayerData => scriptPlayerData;
         
-        private readonly PlayerDataBinding playerDataBinding = new();
-        public PlayerData PlayerData => playerDataBinding.PlayerData;
+        public PlayerDataBinding PlayerDataBinding {get;} = new();
+        public PlayerInventoryDataBinding PlayerInventoryDataBinding {get;} = new();
 
         void OnEnable(){
             ScriptableBindRegistry.OnBindRegistryCreated += OnBindRegistryCreated;
@@ -26,13 +26,15 @@ namespace Project.PlayerBehaviour
 
         public void OnBindRegistryCreated(IBindRegistry registry)
         {
-            registry.Register<PlayerData>(playerDataBinding);
+            registry.Register<PlayerData>(PlayerDataBinding);
+            registry.Register<PlayerInventoryData>(PlayerInventoryDataBinding);
         }
 
 
         public void OnBindRegistryDestroyed(IBindRegistry registry)
         {
-            registry.Unregister<PlayerData>(playerDataBinding);
+            registry.Unregister<PlayerData>(PlayerDataBinding);
+            registry.Unregister<PlayerInventoryData>(PlayerInventoryDataBinding);
         }
     }
 }

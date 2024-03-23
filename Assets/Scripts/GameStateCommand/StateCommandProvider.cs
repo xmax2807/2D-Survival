@@ -35,6 +35,12 @@ namespace Project.GameStateCommand
             }
         }
 
+        public void AddCommand(IGameStateCommand command)
+        {
+            if(command == null) return;
+            m_stateCommands[command.GetType().Name] = command;
+        }
+
         #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -47,7 +53,7 @@ namespace Project.GameStateCommand
                 return x.Type.Name;
             }).ToArray();
         }
-        internal static int FindIndex(string stringValue)
+        public static int FindIndex(string stringValue)
         {
             for(int i = 0; i < StateNames.Length; i++){
                 if(StateNames[i] == stringValue){
@@ -56,13 +62,6 @@ namespace Project.GameStateCommand
             }
             return -1;
         }
-
-        internal void AddCommand(IGameStateCommand command)
-        {
-            if(command == null) return;
-            m_stateCommands[command.GetType().Name] = command;
-        }
-
         private static string[] _stateNames;
         public static string[] StateNames {
             get{

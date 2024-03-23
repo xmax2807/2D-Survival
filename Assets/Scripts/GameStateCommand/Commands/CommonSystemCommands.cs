@@ -16,16 +16,14 @@ namespace Project.GameStateCommand
 
     public sealed class LoadSystemCommand : IGameStateCommand
     {
-        readonly IEnumerator Task;
-        private bool Started = false;
-        public bool Finished => Started && Task == null;
+        public bool Finished {get; private set;} = false;
 
         public IEnumerator Execute()
         {
-            if (!Started)
+            if (!Finished)
             {
-                Started = true;
                 yield return GameManager.Instance.EssentialSystemsAwaiter();
+                Finished = true;
             }
         }
     }

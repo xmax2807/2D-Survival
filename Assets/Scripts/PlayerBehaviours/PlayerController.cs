@@ -24,6 +24,7 @@ namespace Project.PlayerBehaviour{
         }
 
         void OnDisable(){
+            if(GameManager.Instance == null || GameManager.Instance.InputHandler == null) return;
             GameManager.Instance.InputHandler.UnregisterPlayerControlListener(this);
             m_movementController.Disable();
         }
