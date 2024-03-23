@@ -9,8 +9,10 @@ namespace Project.PlayerBehaviour
         public override void AddNeedSaveDataTo(SaveSystemConfiguration saveSystemConfig)
         {
             saveSystemConfig.RegisterSaveableData<PlayerData>(MakeDefault);
+            saveSystemConfig.RegisterSaveableData<PlayerInventoryData>(MakeDefaultInventory);
         }
 
         PlayerData MakeDefault()=> PlayerData.Randomize();
+        PlayerInventoryData MakeDefaultInventory()=> new PlayerInventoryData(gold: 0);
     }
 }

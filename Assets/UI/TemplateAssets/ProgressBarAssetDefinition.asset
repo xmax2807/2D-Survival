@@ -20,5 +20,5 @@ MonoBehaviour:
   middleFill: {fileID: 645499410, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
   tailFill: {fileID: -778506704, guid: 9e266723cd15fd24ea00f694eaaa32f7, type: 3}
   direction: 0
-  partitialThreshold: 100
+  partitialThreshold: 10
   size: {x: 40, y: 25}

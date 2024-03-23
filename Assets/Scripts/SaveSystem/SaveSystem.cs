@@ -12,7 +12,6 @@ namespace Project.SaveSystem
 
         string CurrentFileName => configuration.CurrentFileName;
         IDataService FileDataService => configuration.DataService;
-        private SerializableGameData serializableSaveables;
 
         public SaveSystem(SaveSystemConfiguration config)
         {
@@ -21,7 +20,6 @@ namespace Project.SaveSystem
 
         public void NewGame(){
             data = configuration.RequestNewData();
-            serializableSaveables = new SerializableGameData();
         }
 
         public async void Save()
@@ -29,19 +27,18 @@ namespace Project.SaveSystem
             if(data == null){
                 NewGame();
             }
-            serializableSaveables.SetDataToNonAlloc(data.SaveablesDict);
-            bool result = await FileDataService.SaveAsync(CurrentFileName, serializableSaveables);
+            bool result = await FileDataService.SaveAsync(CurrentFileName, new SerializableGameData(data.SaveablesDict));
             SaveGameSavedEvent?.Invoke(result);
         }
 
         public async void Load()
         {
-            if(data == null){
-                NewGame();
+            var serializableSaveables = await FileDataService.LoadAsync<SerializableGameData>(CurrentFileName);
+            if(serializableSaveables == null){ // failed in loading
+                throw new Exception("Failed load data save at " + CurrentFileName);
             }
-            serializableSaveables = await FileDataService.LoadAsync<SerializableGameData>(CurrentFileName);
-            serializableSaveables.SetDataToNonAlloc(data.SaveablesDict);
-            //UnityEngine.Debug.Log(data);
+            data = serializableSaveables.Result;
+            UnityEngine.Debug.Log(data.ToString());
             SaveGameLoadedEvent?.Invoke(data);
         }
     }

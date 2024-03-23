@@ -26,6 +26,7 @@ namespace Project.PlayerBehaviour
             GameManager.Instance.InputHandler.RegisterPlayerControlListener(this);
         }
         void OnDisable(){
+            if(GameManager.Instance == null || GameManager.Instance.InputHandler == null) return;
             GameManager.Instance.InputHandler.UnregisterPlayerControlListener(this);
         }
         public void OnMove(Vector2 direction, InputActionPhase _)

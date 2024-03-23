@@ -1,14 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
 using Project.BuffSystem;
-using Project.GameEvent;
-using Project.GameEventSystem;
 using Project.InputHandler;
 using Project.LOD;
 using Project.LootSystem;
-using Project.VisualEffectSystem;
 using UnityEngine;
 
 namespace Project.Manager

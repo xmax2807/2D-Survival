@@ -29,7 +29,9 @@ namespace Project.PlayerBehaviour{
         }
 
         void OnDisable(){
+            if(GameManager.Instance == null) return;
             var GameEventRegisterer = GameManager.Instance.GetService<IGameEventRegister>();
+            if(GameEventRegisterer == null) return;
             GameEventRegisterer.Unregister<IEffect>(GameEventType.EffectAdded, OnEffectAdded);
         }
 
