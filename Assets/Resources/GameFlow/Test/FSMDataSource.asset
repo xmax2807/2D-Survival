@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c58837adc9e6444d8252fef09c86304, type: 3}
+  m_Name: FSMDataSource
+  m_EditorClassIdentifier: 
+  Nodes:
+  - {fileID: 1233236564127511047}
+  Links: []
+  _config: {fileID: 11400000, guid: 734ff5222e0b1f446a1c97aca1674d3a, type: 2}
+  _states: []
+--- !u!114 &1233236564127511047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fe49ae1157ef047b6cffb130c5f675, type: 3}
+  m_Name: asdasd
+  m_EditorClassIdentifier: 
+  idString: 42c7834a-cf21-429e-958b-064f022761fd
+  NodePosition: {x: 217.99997, y: 154.6}
+  IsActive: 0
+  Parent: {fileID: 11400000}
+  Name: Machine01
+  Nodes:
+  - {fileID: 11400000, guid: d57e272a5c6de9d4294f1e7125f076c8, type: 2}
+  - {fileID: 11400000, guid: ceb11828e54cced4cb88df61fb390a2a, type: 2}
+  Links: []
