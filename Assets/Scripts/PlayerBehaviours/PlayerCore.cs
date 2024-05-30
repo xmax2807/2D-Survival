@@ -4,9 +4,10 @@ using Project.GameEvent;
 using UnityEngine;
 using Project.Manager;
 using Project.CharacterBehaviour;
+using Project.PartitionSystem;
 
 namespace Project.PlayerBehaviour{
-    public class PlayerCore : Core, ITarget{
+    public class PlayerCore : Core, ITarget, ITrackedTarget{
         [SerializeField] PlayerDataController m_playerData;
         private PlayerModifier m_playerStatModifier;
         private PlayerStats m_playerStats;
@@ -16,6 +17,8 @@ namespace Project.PlayerBehaviour{
         public IStatGetter BaseStateGetter => m_playerStats;
 
         public IEffectHandler EffectHandler => throw new NotImplementedException();
+
+        public Vector2 position => transform.position;
 
         private void Awake(){
             AddCoreComponent(m_playerData);

@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: ChunkStorage
   m_EditorClassIdentifier: 
   chunks:
-  - m_prefab: {fileID: 0}
+  - m_prefab: {fileID: 226516286229051754, guid: 9710e1149c181994397c567c73387100, type: 3}
     chunk_id: 0
+  - m_prefab: {fileID: 226516286229051754, guid: 9710e1149c181994397c567c73387100, type: 3}
+    chunk_id: 1
+  - m_prefab: {fileID: 226516286229051754, guid: 9710e1149c181994397c567c73387100, type: 3}
+    chunk_id: 2
+  - m_prefab: {fileID: 226516286229051754, guid: 9710e1149c181994397c567c73387100, type: 3}
+    chunk_id: 3

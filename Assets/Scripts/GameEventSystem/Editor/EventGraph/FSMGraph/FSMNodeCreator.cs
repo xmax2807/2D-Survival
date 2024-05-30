@@ -55,20 +55,6 @@ namespace Project.GameEventSystem.EventGraph.Editor
             return result;
         }
 
-        // private EventNodeData CreateNodeData(int nodeIndex)
-        // {
-        //     EventNodeData result = null;
-        //     switch (nodeIndex)
-        //     {
-        //         case 0:
-        //             result = ScriptableObject.CreateInstance<StateDataSource>();
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        //     return result;
-        // }
-
         private EventNodeData SaveAsset(EventNodeData asset, string location){
             //ensure last character is a '/'
             if(!location.EndsWith("/")){

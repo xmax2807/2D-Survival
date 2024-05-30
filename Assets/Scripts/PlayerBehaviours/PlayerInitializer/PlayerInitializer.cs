@@ -11,6 +11,7 @@ namespace Project.PlayerBehaviour
     {
         [SerializeField] PlayerManager playerManager;
         [SerializeField] UIRoot PlayerHUD;
+        [SerializeField] Project.Manager.GameEventAPI eventAPI;
         public void Start() => InitializeAsync().Forget();
 
         async UniTask InitializeAsync()
@@ -26,6 +27,9 @@ namespace Project.PlayerBehaviour
             
             playerManager.ScriptPlayerData.MapFrom(playerManager.PlayerDataBinding.PlayerData);
             playerManager.ScriptPlayerData.MapFrom(playerManager.PlayerInventoryDataBinding.PlayerInventoryData);
+
+            PlayerCore core = Instantiate(playerManager.TemplatePrefab, Vector3.zero, Quaternion.identity);
+            eventAPI.PlayerChanged?.Invoke<PartitionSystem.ITrackedTarget>(core);
         }
     }
 }
