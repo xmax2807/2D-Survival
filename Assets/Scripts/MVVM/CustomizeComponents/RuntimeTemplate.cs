@@ -5,7 +5,11 @@ namespace Project.MVVM
 {
     public class RuntimeTemplate : VisualElement
     {
-        public readonly List<(VisualElement, IItemCollectionBinder)> bindings = new();
+        public readonly List<(VisualElement, IItemCollectionBinder)> bindings;
+        public RuntimeTemplate(){
+            focusable = true;
+            bindings = new List<(VisualElement, IItemCollectionBinder)>(capacity: 4);
+        }
 
         public void AddBinding(VisualElement element, params IItemCollectionBinder[] binders)
         {

@@ -1,1 +1,1 @@
-{"assemblyName":"Project","fullTypeNames":["Project.MVVM.MainMenuViewModel+MenuButtonData+MenuButtonBinder"]}
+{"assemblyName":"Project","fullTypeNames":["Project.MVVM.Inventory.InventorySlotBinder","Project.MVVM.MainMenuViewModel+MenuButtonData+MenuButtonBinder"]}

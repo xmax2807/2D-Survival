@@ -1,16 +1,13 @@
 using System.ComponentModel;
 using MVVMToolkit.Binding;
-using MVVMToolkit.Binding.Localization;
 using UnityEngine.UIElements;
-using MVVMToolkit.Binding.Tooltips;
 using UnityEngine;
 using UnityEngine.Localization;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using MVVMToolkit.Binding.Custom;
 
-namespace Project.MVVM{
+namespace Project.MVVM
+{
     public class MyCustomBindingParser : BindingParser
     {
         public MyCustomBindingParser(INotifyPropertyChanged bindingContext, VisualElement root,
@@ -22,6 +19,8 @@ namespace Project.MVVM{
         }
 
         public void RefreshParseBinding(VisualElement item){
+            
+            Dispose();
             ParseAll(item, item =>
             {
                 Parse(item, TextStores, textGetter);

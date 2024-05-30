@@ -11,10 +11,12 @@ namespace Project.MVVM
         readonly VisualTreeAsset _template;
         public DataTemplate(VisualTreeAsset template)
         {
-            if(template is null){
+            if(template == null){
                 throw new ArgumentNullException(nameof(template));
             }
             _template = template;
+            _binderMap = new Dictionary<int, IItemCollectionBinder[]>();
+
             style.display = new(DisplayStyle.None);
             Init();
         }
@@ -59,12 +61,13 @@ namespace Project.MVVM
             }
         }
 
-        private Dictionary<int, IItemCollectionBinder[]> _binderMap;
+        private readonly Dictionary<int, IItemCollectionBinder[]> _binderMap;
 
         private void Init()
         {
             VisualElement templateEle = _template.Instantiate();
-            _binderMap = new();
+
+            _binderMap.Clear();
 
             int childIndex = 0;
             foreach(VisualElement child in templateEle.Children()){

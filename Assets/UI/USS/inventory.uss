@@ -1,0 +1,144 @@
+
+.container{
+    flex-grow: 1;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* -unity-font-definition: url(""); */
+
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    color: rgb(255,197,0); /*text color*/
+}
+.inventory{
+    background-image: url("/Assets/UI/Inventory/Paper 1.png");
+    width: 780px;
+    padding: 30px;
+    max-height: 600px;
+}
+
+.inventory__frame{
+    position: absolute;
+    top: -10px;
+    left: -17px;
+    width: 800px;
+    max-height: 610px;
+    /* background-image: url(""); */
+    -unity-slice-scale: 0.5;
+}
+
+
+.inventory__header{
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 800px;
+    height: 100px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+
+    -unity-slice-scale: 0.5;
+    font-size: 32px;
+}
+
+.slot__container{
+    margin: 20px;
+    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-image: url("/Assets/UI/Inventory/Frame1.png");
+    -unity-slice-scale: 1.5;
+}
+
+.slot{
+    width: 80px;
+    height: 80px;
+    margin: 6px;
+    background-image: url("/Assets/UI/Inventory/slot_holder.png");
+    -unity-slice-scale: 0.5;
+}
+
+.grid-view__item--selected{
+    /* background-color: aqua; */
+    background-image: url("/Assets/UI/Inventory/Select_Highlight.png");
+    background-size: cover;
+    -unity-slice-scale: 2;
+}
+
+.slot__frame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border-width: 0;
+}
+
+.slot__icon{
+    padding: 12px;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+.slot__stack{
+    position: absolute;
+    color: black;
+    bottom: 0;
+    left: 2;
+    font-size: 12px;
+}
+
+/* this is template icon while dragging */
+.ghost__icon{
+    visibility: hidden;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: none;
+}
+
+/* grid_view */
+.grid-view__container{
+    flex-grow: 1;
+    padding-top: 30px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+/* unity_scroll_view */
+.unity-scroller--vertical{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.unity-repeat-button{
+    display: none;
+}
+.unity-base-slider__drag-container{
+    width: 24px;
+    background-image: url("/Assets/UI/Inventory/scroller_container.png");
+}
+.unity-base-slider__tracker{
+    display: none;
+}
+
+.unity-base-slider__dragger{
+    /* width: 24px; */
+    border-color: rgba(0, 0, 0, 0);
+    background-image: url("/Assets/UI/Inventory/scroller_button.png");
+    background-color: rgba(0, 0, 0, 0);
+    background-size: cover;
+    -unity-slice-scale: 0.75;
+}
+/* .unity-scroll-view{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.unity-scroll-view__content-and-vertical-scroll-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+} */
