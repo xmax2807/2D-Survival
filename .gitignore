@@ -73,3 +73,4 @@ crashlytics-build.properties
 Assets/Samples/*
 
 Assets/Samples.meta
+Assets/Resources/MVVMToolkit/*
