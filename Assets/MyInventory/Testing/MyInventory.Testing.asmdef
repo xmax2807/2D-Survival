@@ -1,0 +1,16 @@
+{
+    "name": "MyInventory.Testing",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e86d60f534f598041ac583fdb85f0ffc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

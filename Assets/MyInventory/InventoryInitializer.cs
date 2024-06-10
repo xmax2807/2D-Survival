@@ -1,18 +1,17 @@
 using System;
-using System.Threading.Tasks;
-using PlasticGui.WorkspaceWindow.BrowseRepository;
 
-namespace MyInventory{
+namespace MyInventory
+{
     public sealed class InventoryInitializer : IDisposable{
         public static bool IsInitialized{get; private set;}
         private static InventoryInitializer s_instance;
 
-        private IInvetoryRepository m_repository;
+        private IInventoryRepository m_repository;
         private int m_itemSlotCapacity;
         private IInventoryUI m_ui;
         private IInventoryEventMapper m_eventMapper;
         private InternalInventoryEventHandler m_eventHandler;
-        private InventoryManager m_manager;
+        private InternalInventoryManager m_manager;
 
         public class InventoryInitializerBuilder{
             private readonly InventoryInitializer _instance;
@@ -33,7 +32,7 @@ namespace MyInventory{
                 return this;
             }
 
-            public InventoryInitializerBuilder WithRepository(IInvetoryRepository repository){
+            public InventoryInitializerBuilder WithRepository(IInventoryRepository repository){
                 _instance.m_repository = repository;
                 return this;
             }
@@ -53,7 +52,7 @@ namespace MyInventory{
             EnsureValidInitializer();
         }
 
-        private InventoryInitializer(IInvetoryRepository repository, IInventoryUI ui, IInventoryEventMapper mapper) : this(){
+        private InventoryInitializer(IInventoryRepository repository, IInventoryUI ui, IInventoryEventMapper mapper) : this(){
             
             // if any of parameters is null, throw
             if(repository == null || ui == null || mapper == null){
@@ -84,7 +83,7 @@ namespace MyInventory{
             return new InventoryInitializerBuilder();
         }
 
-        public static InventoryInitializer Create(IInvetoryRepository repos, IInventoryUI ui, IInventoryEventMapper mapper){
+        public static InventoryInitializer Create(IInventoryRepository repos, IInventoryUI ui, IInventoryEventMapper mapper){
             if(IsInitialized){
                 return s_instance;
             }
@@ -100,7 +99,7 @@ namespace MyInventory{
                 return;
             }
 
-            m_manager = new InventoryManager(m_repository, m_ui);
+            m_manager = new InternalInventoryManager(m_repository, m_ui);
             m_eventHandler = new InternalInventoryEventHandler(m_manager);
             m_eventMapper.AttachHandler(m_eventHandler);
 

@@ -1,1 +1,1 @@
-{"items":[]}
+{"items":[{"fullTypeName":"Project.MVVM.PlayerHUD.PlayerViewModel","fieldNames":["playerHUDRepository"]}]}

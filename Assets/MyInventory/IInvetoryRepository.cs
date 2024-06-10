@@ -1,9 +1,9 @@
 namespace MyInventory{
 
-    public interface IInvetoryRepository{
-        void SaveInventoryData(InventoryDataPersist data);
-        InventoryDataPersist LoadInventoryData(int playerId);
-        UnityEngine.Sprite GetItemIcon(int id);
-        InventoryItemDetail GetItemDetail(int id);
+    public interface IInventoryRepository{
+        UnityEngine.Sprite GetItemIcon(ushort iconId);
+        string GetItemDescription(int itemId);
+        string GetItemName(int itemId);
+        InventoryItemDTO[] GetAllItems();
     }
 }

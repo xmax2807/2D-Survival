@@ -1,7 +1,6 @@
 using UnityEngine;
 namespace Project.MVVM.Inventory
 {
-    [System.Serializable]
     public class SlotData{
         public int ItemId;
         public int Quantity;
