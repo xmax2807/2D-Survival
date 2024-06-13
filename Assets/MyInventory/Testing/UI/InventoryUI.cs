@@ -18,18 +18,20 @@ namespace MyInventory.Testing
         public void Open(int count)
         {
             UpdateSlot(count);
+            this.gameObject.SetActive(true);
         }
 
         public void Close()
         {
 
             for (int i = 0; i < m_slotCount; i++)
+            {
+                if (m_slots[i] != null)
                 {
-                    if (m_slots[i] != null)
-                    {
-                        UnbindItemEvent?.Invoke(i, m_slots[i]);
-                    }
+                    UnbindItemEvent?.Invoke(i, m_slots[i]);
                 }
+            }
+            this.gameObject.SetActive(false);
         }
 
         private void UpdateSlot(int count)

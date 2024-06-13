@@ -23,15 +23,20 @@ namespace MyInventory.Testing{
             initializer.Intialize();
         }
 
-        System.Collections.IEnumerator Start(){
-            yield return new WaitForSeconds(2f);
-            _eventMapper.InvokeEvent(InventoryUIActiveEventData.GetFromPool(true, 0f));
-        }
-
         private class EventMapper : IInventoryEventMapper
         {
             private readonly Dictionary<Type, Delegate> _eventStorage = new();
             private LinkedList<IInventoryEventHandler> _handlers;
+
+            public EventMapper(){
+                ExampleEvents.ActiveInventoryEvent += OnPlayerRequestOpenInventory;
+            }
+
+            private void OnPlayerRequestOpenInventory(bool active)
+            {
+                InvokeEvent(InventoryUIActiveEventData.GetFromPool(active, 0f));
+            }
+
             public void AttachHandler(IInventoryEventHandler eventHandler)
             {
                 _handlers ??= new LinkedList<IInventoryEventHandler>();
@@ -49,6 +54,8 @@ namespace MyInventory.Testing{
 
             public void Dispose()
             {
+                ExampleEvents.ActiveInventoryEvent -= OnPlayerRequestOpenInventory;
+
                 foreach(var handler in _handlers){
                     handler?.OnDetachedFromMapper(this);
                 }
